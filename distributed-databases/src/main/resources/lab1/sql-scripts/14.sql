@@ -1,5 +1,4 @@
 select *
 from laptop
-where not exists(select *
-                 from pc
-                 where laptop.speed > pc.speed)
+where price < (select min(price)
+               from pc)
