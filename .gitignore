@@ -27,3 +27,8 @@ release.properties
 *.iws
 out/
 .idea_modules/
+
+##########################
+## CMake
+##########################
+cmake-build-*/
