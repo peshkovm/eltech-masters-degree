@@ -3,6 +3,8 @@
 #include <stdlib.h> // srand, rand
 #include <time.h>   // time
 #include <math.h>
+#include <bits/stdc++.h>
+#include <w32api/sysinfoapi.h>
 
 using namespace std;
 
@@ -48,9 +50,10 @@ void remove(int arr[], int &lastPos) {
     trickleDown(arr, lastPos, 0);
 }
 
-void add(int arr[], int &lastPos, int newElement) {
-    arr[++lastPos] = newElement;
-    trickleUp(arr, lastPos, lastPos);
+void add(int arr[], int newElement) {
+    static int i = -1;
+    arr[++i] = newElement;
+    //trickleUp(arr, i, i);
 }
 
 /* A utility function to print array of size n */
@@ -60,15 +63,121 @@ void printArray(int arr[], int n) {
     cout << "\n";
 }
 
-void heapSort(int arr[], int lastPos, int arrLength) {
-    for (int i = 0; i < arrLength - 1; i++) {
-        remove(arr, lastPos);
+int calculateMidVal(int arr[], int arrLength) {
+    int arrAv = 0;
+
+    for (int i = 0; i < arrLength; i++)
+        arrAv += arr[i];
+
+    return arrAv / arrLength;
+}
+
+/*void swapArrays(int leftArr[], int rightArr[], int leftArrLength, int rightArrLength) {
+    int midVal = calculateMidVal(leftArr, rightArr, leftArrLength, rightArrLength);
+
+    for (int i = 0, j = rightArrLength - 1; i < leftArrLength && j >= 0;) {
+        if (leftArr[i] <= midVal && ++i >= leftArrLength) return;
+
+        if (rightArr[j] > midVal && --j < 0) return;
+
+        if (leftArr[i] > midVal && rightArr[j] <= midVal) {
+            swap(leftArr[i], rightArr[j]);
+            i++;
+            j--;
+        }
+    }
+
+    for (int i = 0, j = rightArrLength - 1; i < leftArrLength;) {
+        if (leftArr[i] <= midVal) {
+            i++;
+            continue;
+        }
+
+        if (rightArr[j] < leftArr[i]) {
+            swap(leftArr[i], rightArr[j]);
+            i++;
+            j--;
+        } else
+            j--;
+    }
+}*/
+
+int swapArrays2(int arr[], int arrLength) {
+    int pivotPoint = arrLength - 1;
+    int value = arr[pivotPoint];
+    int counter = 0;
+
+    for (int i = 0; i < pivotPoint; i++) {
+        if (arr[i] <= value) {
+            swap(arr[i], arr[counter]);
+            counter++;
+        }
+    }
+    swap(arr[counter], arr[pivotPoint]);
+
+    return counter;
+}
+
+void heapSortParallel(int arr[], int arrLength, int maxLengthOfPartition) {
+    if (arrLength <= 1)
+        return;
+
+    int midLocation = swapArrays2(arr, arrLength);
+    //swapArrays(leftArr, rightArr, leftArrLength, rightArrLength);
+
+    int leftArrLength = midLocation - 0;
+    int rightArrLength = arrLength - midLocation - 1;
+    int *leftArr = arr;
+    int *rightArr = leftArr + leftArrLength + 1;
+
+    cout << "Left: ";
+    printArray(leftArr, leftArrLength);
+    cout << "Right: ";
+    printArray(rightArr, rightArrLength);
+
+    if (leftArrLength > maxLengthOfPartition)
+        heapSortParallel(leftArr, leftArrLength, maxLengthOfPartition);
+    else if (leftArrLength > 1) {
+        int lastPos = -1;
+
+        for (int i = 0; i < leftArrLength; i++) {
+            lastPos++;
+            trickleUp(leftArr, lastPos, lastPos);
+        }
+
+        for (int i = 0; i < leftArrLength - 1; i++) {
+            remove(leftArr, lastPos);
+        }
+
+        cout << "After trickle left: ";
+        printArray(leftArr, leftArrLength);
+
+        copy(leftArr, leftArr + leftArrLength, arr);
+    }
+
+    if (rightArrLength > maxLengthOfPartition)
+        heapSortParallel(rightArr, rightArrLength, maxLengthOfPartition);
+    else if (rightArrLength > 1) {
+        int lastPos = -1;
+
+        for (int i = 0; i < rightArrLength; i++) {
+            lastPos++;
+            trickleUp(rightArr, lastPos, lastPos);
+        }
+
+        for (int i = 0; i < rightArrLength - 1; i++) {
+            remove(rightArr, lastPos);
+        }
+
+        cout << "After trickle right: ";
+        printArray(rightArr, rightArrLength);
+
+        copy(rightArr, rightArr + rightArrLength, arr + leftArrLength);
     }
 }
 
 int main() {
     int arrLength = 0;
-    int lastPos = -1;
 
     cout << "Enter count of elements in array: ";
     cin >> arrLength;
@@ -87,8 +196,12 @@ int main() {
 
     for (int i = 0; i < arrLength; i++) {
         int randomNumber = 1 + (rand() % (arrLength - 1 + 1));
-        add(arr, lastPos, randomNumber);
+        add(arr, randomNumber);
     }
+
+    SYSTEM_INFO systemInfo;
+    GetSystemInfo(&systemInfo);
+    int numCPU = systemInfo.dwNumberOfProcessors;
 
     double stop = omp_get_wtime();
 
@@ -96,10 +209,14 @@ int main() {
 
     cout << "In array: " << endl;
     printArray(arr, arrLength);
+    cout << endl;
+    cout << "Num of threads = " << numCPU << endl << endl;
 
     start = omp_get_wtime();
 
-    heapSort(arr, lastPos, arrLength);
+    //omp_set_num_threads(numCPU);
+
+    heapSortParallel(arr, arrLength, arrLength / numCPU);
 
     stop = omp_get_wtime();
 
