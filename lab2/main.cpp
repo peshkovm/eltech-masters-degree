@@ -5,6 +5,7 @@
 #include <math.h>
 #include <bits/stdc++.h>
 #include <w32api/sysinfoapi.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -63,46 +64,7 @@ void printArray(int arr[], int n) {
     cout << "\n";
 }
 
-int calculateMidVal(int arr[], int arrLength) {
-    int arrAv = 0;
-
-    for (int i = 0; i < arrLength; i++)
-        arrAv += arr[i];
-
-    return arrAv / arrLength;
-}
-
-/*void swapArrays(int leftArr[], int rightArr[], int leftArrLength, int rightArrLength) {
-    int midVal = calculateMidVal(leftArr, rightArr, leftArrLength, rightArrLength);
-
-    for (int i = 0, j = rightArrLength - 1; i < leftArrLength && j >= 0;) {
-        if (leftArr[i] <= midVal && ++i >= leftArrLength) return;
-
-        if (rightArr[j] > midVal && --j < 0) return;
-
-        if (leftArr[i] > midVal && rightArr[j] <= midVal) {
-            swap(leftArr[i], rightArr[j]);
-            i++;
-            j--;
-        }
-    }
-
-    for (int i = 0, j = rightArrLength - 1; i < leftArrLength;) {
-        if (leftArr[i] <= midVal) {
-            i++;
-            continue;
-        }
-
-        if (rightArr[j] < leftArr[i]) {
-            swap(leftArr[i], rightArr[j]);
-            i++;
-            j--;
-        } else
-            j--;
-    }
-}*/
-
-int swapArrays2(int arr[], int arrLength) {
+int swapArrays(int *arr, int arrLength) {
     int pivotPoint = arrLength - 1;
     int value = arr[pivotPoint];
     int counter = 0;
@@ -118,61 +80,69 @@ int swapArrays2(int arr[], int arrLength) {
     return counter;
 }
 
-void heapSortParallel(int arr[], int arrLength, int maxLengthOfPartition) {
+void heapSortParallel(int arr[], const int arrLength, const int subArrLengthToDivide) {
     if (arrLength <= 1)
         return;
 
-    int midLocation = swapArrays2(arr, arrLength);
-    //swapArrays(leftArr, rightArr, leftArrLength, rightArrLength);
+    int midLocation = swapArrays(arr, arrLength);
 
     int leftArrLength = midLocation - 0;
-    int rightArrLength = arrLength - midLocation - 1;
+    int rightArrLength = arrLength - midLocation;
     int *leftArr = arr;
-    int *rightArr = leftArr + leftArrLength + 1;
+    int *rightArr = leftArr + leftArrLength;
 
-    cout << "Left: ";
-    printArray(leftArr, leftArrLength);
-    cout << "Right: ";
-    printArray(rightArr, rightArrLength);
+#pragma omp parallel sections
+    {
+#pragma omp section
+        {
+#pragma omp critical
+            {
+                cout << "Left sub array: " << endl;
+                cout << "   Thread # = " << omp_get_thread_num() << "   ";
+                cout << "   Arr length = " << leftArrLength << endl;
+            }
 
-    if (leftArrLength > maxLengthOfPartition)
-        heapSortParallel(leftArr, leftArrLength, maxLengthOfPartition);
-    else if (leftArrLength > 1) {
-        int lastPos = -1;
+            if (leftArrLength > subArrLengthToDivide)
+                heapSortParallel(leftArr, leftArrLength, subArrLengthToDivide);
+            else if (leftArrLength > 1) {
+                int lastPos = -1;
 
-        for (int i = 0; i < leftArrLength; i++) {
-            lastPos++;
-            trickleUp(leftArr, lastPos, lastPos);
+                for (int i = 0; i < leftArrLength; i++) {
+                    lastPos++;
+                    trickleUp(leftArr, lastPos, lastPos);
+                }
+
+                for (int i = 0; i < leftArrLength - 1; i++) {
+                    remove(leftArr, lastPos);
+                }
+            }
         }
 
-        for (int i = 0; i < leftArrLength - 1; i++) {
-            remove(leftArr, lastPos);
+#pragma omp section
+        {
+#pragma omp critical
+            {
+                cout << "Right sub array: " << endl;
+                cout << "   Thread # = " << omp_get_thread_num() << "   ";
+                cout << "   Arr length = " << leftArrLength << endl;
+            }
+
+            if (rightArrLength > subArrLengthToDivide)
+                heapSortParallel(rightArr, rightArrLength, subArrLengthToDivide);
+            else if (rightArrLength > 1) {
+                int lastPos = -1;
+
+                for (int i = 0; i < rightArrLength; i++) {
+                    lastPos++;
+                    trickleUp(rightArr, lastPos, lastPos
+                    );
+                }
+
+                for (int i = 0; i < rightArrLength - 1; i++) {
+                    remove(rightArr, lastPos);
+                }
+            }
         }
-
-        cout << "After trickle left: ";
-        printArray(leftArr, leftArrLength);
-
-        copy(leftArr, leftArr + leftArrLength, arr);
-    }
-
-    if (rightArrLength > maxLengthOfPartition)
-        heapSortParallel(rightArr, rightArrLength, maxLengthOfPartition);
-    else if (rightArrLength > 1) {
-        int lastPos = -1;
-
-        for (int i = 0; i < rightArrLength; i++) {
-            lastPos++;
-            trickleUp(rightArr, lastPos, lastPos);
-        }
-
-        for (int i = 0; i < rightArrLength - 1; i++) {
-            remove(rightArr, lastPos);
-        }
-
-        cout << "After trickle right: ";
-        printArray(rightArr, rightArrLength);
-
-        copy(rightArr, rightArr + rightArrLength, arr + leftArrLength);
     }
 }
 
