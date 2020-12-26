@@ -6,4 +6,8 @@ public interface Set<T> {
   boolean remove(T item);
 
   boolean contains(T item);
+
+  void clear();
+
+  int size();
 }

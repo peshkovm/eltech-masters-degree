@@ -58,18 +58,24 @@ public class SynchronizedList implements Set<Integer> {
     return curr.item.equals(item);
   }
 
-  /**
-   * Not synchronized.
-   *
-   * @return
-   */
-  public int size() {
+  @Override
+  public void clear() {
+    Node curr = this.head.next;
+
+    while (curr != tail) {
+      remove(curr.item);
+      curr = curr.next;
+    }
+  }
+
+  @Override
+  public synchronized int size() {
     Node curr = this.head.next;
     int size = 0;
 
     while (curr != tail) {
-      curr = curr.next;
       size++;
+      curr = curr.next;
     }
 
     return size;
