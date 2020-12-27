@@ -7,6 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import jdk.internal.vm.annotation.Contended;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -26,24 +27,18 @@ import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import sun.misc.Contended;
 
 public class PerformanceTest {
   private static final int SET_SIZE = 50_000;
-  private static final int NUM_ITERATIONS = 20;
-  private static final int ITERATION_TIME = 2000;
-  private static final int NUM_OF_FORKS = 5;
-  private static final String RES_FILE_PATH = "max/src/test/resources/res.txt";
+  private static final int NUM_ITERATIONS = 10;
+  private static final int ITERATION_TIME = 1000;
+  private static final int NUM_OF_FORKS = 2;
+  private static final String RES_FILE_PATH = "max/src/test/resources/res.csv";
 
   @State(Scope.Benchmark)
   public abstract static class SetState {
     @Contended protected Set<Integer> set;
     @Contended protected AtomicInteger i;
-
-    @Setup(Level.Trial)
-    public void init0() {
-      init();
-    }
 
     @Setup(Level.Iteration)
     public void prepareSet0() {
@@ -56,10 +51,16 @@ public class PerformanceTest {
   }
 
   public abstract static class SetAddState extends SetState {
+
     @Override
     public void prepareSet() {
       set.clear();
       i.set(0);
+    }
+
+    @Setup(Level.Trial)
+    public void init0() {
+      init();
     }
   }
 
@@ -143,11 +144,11 @@ public class PerformanceTest {
       bh.consume(lockFreeList.add(i.getAndIncrement()));
     }
 
-    @Threads(50)
-    @Warmup(batchSize = SET_SIZE / 50)
-    @Measurement(batchSize = SET_SIZE / 50)
+    @Threads(10)
+    @Warmup(batchSize = SET_SIZE / 10)
+    @Measurement(batchSize = SET_SIZE / 10)
     @Benchmark
-    public void add_50_thread(final LockFreeListAddState state, final Blackhole bh) {
+    public void add_10_thread(final LockFreeListAddState state, final Blackhole bh) {
       final Set<Integer> lockFreeList = state.set;
       final AtomicInteger i = state.i;
 
@@ -196,9 +197,9 @@ public class PerformanceTest {
       bh.consume(lockFreeList.add(i.getAndIncrement()));
     }
 
-    @Threads(50)
+    @Threads(10)
     @Benchmark
-    public void add_50_thread(final LockFreeListAddState state, final Blackhole bh) {
+    public void add_10_thread(final LockFreeListAddState state, final Blackhole bh) {
       final Set<Integer> lockFreeList = state.set;
       final AtomicInteger i = state.i;
 
@@ -256,11 +257,11 @@ public class PerformanceTest {
       bh.consume(synchronizedList.add(i.getAndIncrement()));
     }
 
-    @Threads(50)
-    @Warmup(batchSize = SET_SIZE / 50)
-    @Measurement(batchSize = SET_SIZE / 50)
+    @Threads(10)
+    @Warmup(batchSize = SET_SIZE / 10)
+    @Measurement(batchSize = SET_SIZE / 10)
     @Benchmark
-    public void add_50_thread(final SynchronizedListAddState state, final Blackhole bh) {
+    public void add_10_thread(final SynchronizedListAddState state, final Blackhole bh) {
       final Set<Integer> synchronizedList = state.set;
       final AtomicInteger i = state.i;
 
@@ -309,9 +310,9 @@ public class PerformanceTest {
       bh.consume(synchronizedList.add(i.getAndIncrement()));
     }
 
-    @Threads(50)
+    @Threads(10)
     @Benchmark
-    public void add_50_thread(final SynchronizedListAddState state, final Blackhole bh) {
+    public void add_10_thread(final SynchronizedListAddState state, final Blackhole bh) {
       final Set<Integer> synchronizedList = state.set;
       final AtomicInteger i = state.i;
 

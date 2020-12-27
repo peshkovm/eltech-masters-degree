@@ -7,6 +7,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import jdk.internal.vm.annotation.Contended;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
@@ -26,14 +27,13 @@ import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import sun.misc.Contended;
 
 public class PerformanceTest {
   private static final int SET_SIZE = 50_000;
-  private static final int NUM_ITERATIONS = 20;
-  private static final int ITERATION_TIME = 2000;
-  private static final int NUM_OF_FORKS = 5;
-  private static final String RES_FILE_PATH = "den/src/test/resources/res.txt";
+  private static final int NUM_ITERATIONS = 10;
+  private static final int ITERATION_TIME = 1000;
+  private static final int NUM_OF_FORKS = 2;
+  private static final String RES_FILE_PATH = "den/src/test/resources/res.csv";
 
   @State(Scope.Benchmark)
   public abstract static class SetState {
@@ -147,11 +147,11 @@ public class PerformanceTest {
       return lockFreeQueue;
     }
 
-    @Threads(50)
-    @Warmup(batchSize = SET_SIZE / 50)
-    @Measurement(batchSize = SET_SIZE / 50)
+    @Threads(10)
+    @Warmup(batchSize = SET_SIZE / 10)
+    @Measurement(batchSize = SET_SIZE / 10)
     @Benchmark
-    public Pool<Integer> enq_50_thread(final LockFreeQueueAddState state, final Blackhole bh) {
+    public Pool<Integer> enq_10_thread(final LockFreeQueueAddState state, final Blackhole bh) {
       final Pool<Integer> lockFreeQueue = state.pool;
       final AtomicInteger i = state.i;
 
@@ -205,9 +205,9 @@ public class PerformanceTest {
       return lockFreeQueue;
     }
 
-    @Threads(50)
+    @Threads(10)
     @Benchmark
-    public Pool<Integer> enq_50_thread(final LockFreeQueueAddState state, final Blackhole bh) {
+    public Pool<Integer> enq_10_thread(final LockFreeQueueAddState state, final Blackhole bh) {
       final Pool<Integer> lockFreeQueue = state.pool;
       final AtomicInteger i = state.i;
 
@@ -270,11 +270,11 @@ public class PerformanceTest {
       return synchronizedQueue;
     }
 
-    @Threads(50)
-    @Warmup(batchSize = SET_SIZE / 50)
-    @Measurement(batchSize = SET_SIZE / 50)
+    @Threads(10)
+    @Warmup(batchSize = SET_SIZE / 10)
+    @Measurement(batchSize = SET_SIZE / 10)
     @Benchmark
-    public Pool<Integer> enq_50_thread(final SynchronizedQueueAddState state, final Blackhole bh) {
+    public Pool<Integer> enq_10_thread(final SynchronizedQueueAddState state, final Blackhole bh) {
       final Pool<Integer> synchronizedQueue = state.pool;
       final AtomicInteger i = state.i;
 
@@ -328,9 +328,9 @@ public class PerformanceTest {
       return synchronizedQueue;
     }
 
-    @Threads(50)
+    @Threads(10)
     @Benchmark
-    public Pool<Integer> enq_50_thread(final SynchronizedQueueAddState state, final Blackhole bh) {
+    public Pool<Integer> enq_10_thread(final SynchronizedQueueAddState state, final Blackhole bh) {
       final Pool<Integer> synchronizedQueue = state.pool;
       final AtomicInteger i = state.i;
 
