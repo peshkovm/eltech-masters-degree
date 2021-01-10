@@ -1,7 +1,8 @@
-package com.github.denpeshkov;
+package com.github.denpeshkov.lab1;
 
 import static org.junit.Assert.assertEquals;
 
+import com.github.denpeshkov.lab1.SynchronizedQueue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;

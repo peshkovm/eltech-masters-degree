@@ -1,4 +1,4 @@
-package com.github.denpeshkov;
+package com.github.denpeshkov.lab1;
 
 public interface Pool<T> {
   void enq(T item);

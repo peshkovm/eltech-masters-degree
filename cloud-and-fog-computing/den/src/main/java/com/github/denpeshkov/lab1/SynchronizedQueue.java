@@ -1,4 +1,4 @@
-package com.github.denpeshkov;
+package com.github.denpeshkov.lab1;
 
 public class SynchronizedQueue<T> implements Pool<T> {
   private Node<T> head;

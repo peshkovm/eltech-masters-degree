@@ -29,8 +29,8 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
 public class PerformanceTest {
-  private static final int NUM_OF_FORKS = 1;
-  private static final int NUM_ITERATIONS = 1;
+  private static final int NUM_ITERATIONS = 20;
+  private static final int NUM_OF_FORKS = 2;
   private static final String RES_FILE_PATH = "max/src/test/resources/lab2/res.csv";
 
   @State(Scope.Benchmark)

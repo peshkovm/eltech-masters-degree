@@ -1,6 +1,7 @@
-package com.github.denpeshkov;
+package com.github.denpeshkov.lab2;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,20 +14,20 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LockFreeQueueCorrectnessNaiveTest {
-  static final int NUM_OF_THREADS = 50;
+public class FlatCombinedHashSetSingleCombinerTest {
+  static final int NUM_OF_THREADS = 100;
   static final ExecutorService executorService = Executors.newFixedThreadPool(NUM_OF_THREADS);
-  static LockFreeQueue<Integer> lockFreeQueue;
+  static FlatCombinedHashSetSingleCombiner<Integer> hashSet;
   static CountDownLatch countDownLatch;
 
   @Before
   public void setUp() {
-    lockFreeQueue = new LockFreeQueue<>();
+    hashSet = new FlatCombinedHashSetSingleCombiner<>(NUM_OF_THREADS, NUM_OF_THREADS);
     countDownLatch = new CountDownLatch(NUM_OF_THREADS);
   }
 
   @Test
-  public void enq() throws InterruptedException {
+  public void add() throws InterruptedException {
     final List<Callable<Void>> tasks = new ArrayList<>();
 
     for (int i = 0; i < NUM_OF_THREADS; i++) {
@@ -41,7 +42,7 @@ public class LockFreeQueueCorrectnessNaiveTest {
                   e.printStackTrace();
                   assert false;
                 }
-                lockFreeQueue.enq(finalI);
+                hashSet.add(finalI);
               },
               null));
     }
@@ -58,18 +59,21 @@ public class LockFreeQueueCorrectnessNaiveTest {
               }
             });
 
-    assertEquals(NUM_OF_THREADS, lockFreeQueue.size());
+    for (int i = 0; i < NUM_OF_THREADS; i++) {
+      assertTrue(hashSet.contains(i));
+    }
   }
 
   @Test
-  public void deq() throws InterruptedException {
+  public void remove() throws InterruptedException {
     final List<Callable<Void>> tasks = new ArrayList<>();
 
     for (int i = 0; i < NUM_OF_THREADS; i++) {
-      lockFreeQueue.enq(i);
+      hashSet.add(i);
     }
 
     for (int i = 0; i < NUM_OF_THREADS; i++) {
+      int finalI = i;
       tasks.add(
           Executors.callable(
               () -> {
@@ -79,7 +83,7 @@ public class LockFreeQueueCorrectnessNaiveTest {
                 } catch (InterruptedException e) {
                   e.printStackTrace();
                 }
-                lockFreeQueue.deq();
+                hashSet.remove(finalI);
               },
               null));
     }
@@ -96,18 +100,46 @@ public class LockFreeQueueCorrectnessNaiveTest {
               }
             });
 
-    assertEquals(0, lockFreeQueue.size());
+    for (int i = 0; i < NUM_OF_THREADS; i++) {
+      assertFalse(hashSet.contains(i));
+    }
   }
 
   @Test
-  public void clear() {
+  public void contains() throws InterruptedException {
+    final List<Callable<Boolean>> tasks = new ArrayList<>();
+
     for (int i = 0; i < NUM_OF_THREADS; i++) {
-      lockFreeQueue.enq(i);
+      hashSet.add(i);
     }
 
-    lockFreeQueue.clear();
+    for (int i = 0; i < NUM_OF_THREADS; i++) {
+      int finalI = i;
+      tasks.add(
+          () -> {
+            countDownLatch.countDown();
+            countDownLatch.await();
+            return hashSet.contains(finalI);
+          });
+    }
 
-    assertEquals(0, lockFreeQueue.size());
+    final boolean contains =
+        executorService.invokeAll(tasks).stream()
+            .map(
+                future -> {
+                  boolean res = false;
+                  try {
+                    res = future.get();
+                  } catch (Exception e) {
+                    e.printStackTrace();
+                  }
+
+                  return res;
+                })
+            .reduce((contains1, contains2) -> contains1 && contains2)
+            .get();
+
+    assertTrue(contains);
   }
 
   @AfterClass
