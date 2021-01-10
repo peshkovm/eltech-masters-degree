@@ -1,0 +1,5 @@
+Id,Mode,Cnt,Threads,Score,Error,Units
+com.github.denpeshkov.lab2.PerformanceTest.FCHashSetAccelerationTest.add_10_thread-SingleShotTime,SingleShotTime,160,10,3241.8608068750004,1269.9543296772752,us/op
+com.github.denpeshkov.lab2.PerformanceTest.FCHashSetAccelerationTest.add_1_thread-SingleShotTime,SingleShotTime,160,1,19038.46945624999,699.2792035006016,us/op
+com.github.denpeshkov.lab2.PerformanceTest.FCHashSetAccelerationTest.add_2_thread-SingleShotTime,SingleShotTime,160,2,5710.3072999999995,629.5770224160087,us/op
+com.github.denpeshkov.lab2.PerformanceTest.FCHashSetAccelerationTest.add_4_thread-SingleShotTime,SingleShotTime,160,4,4498.305607812499,3406.4615514159686,us/op

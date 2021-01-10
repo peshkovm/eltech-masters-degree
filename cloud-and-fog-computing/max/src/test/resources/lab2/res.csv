@@ -1,0 +1,13 @@
+Id,Mode,Cnt,Threads,Score,Error,Units
+com.github.peshkovm.lab2.PerformanceTest.SenseBarrierAccelerationTest.await_16_thread-SingleShotTime,SingleShotTime,40,16,22.7908551265625,4.5459512378524325,ms/op
+com.github.peshkovm.lab2.PerformanceTest.SenseBarrierAccelerationTest.await_2_thread-SingleShotTime,SingleShotTime,40,2,0.22058756250000006,0.2941751990064825,ms/op
+com.github.peshkovm.lab2.PerformanceTest.SenseBarrierAccelerationTest.await_32_thread-SingleShotTime,SingleShotTime,40,32,41.36426106171875,10.369711492667,ms/op
+com.github.peshkovm.lab2.PerformanceTest.SenseBarrierAccelerationTest.await_4_thread-SingleShotTime,SingleShotTime,40,4,2.694292743750001,1.6215170375750718,ms/op
+com.github.peshkovm.lab2.PerformanceTest.SimpleBarrierAccelerationTest.await_16_thread-SingleShotTime,SingleShotTime,40,16,0.22460035468750003,0.1055976400985036,ms/op
+com.github.peshkovm.lab2.PerformanceTest.SimpleBarrierAccelerationTest.await_2_thread-SingleShotTime,SingleShotTime,40,2,0.0417424125,0.02176361862534231,ms/op
+com.github.peshkovm.lab2.PerformanceTest.SimpleBarrierAccelerationTest.await_32_thread-SingleShotTime,SingleShotTime,40,32,0.50668206171875,0.2480596360711936,ms/op
+com.github.peshkovm.lab2.PerformanceTest.SimpleBarrierAccelerationTest.await_4_thread-SingleShotTime,SingleShotTime,40,4,0.08053644999999998,0.013280715935976465,ms/op
+com.github.peshkovm.lab2.PerformanceTest.TreeBarrierAccelerationTest.await_16_thread-SingleShotTime,SingleShotTime,40,16,27.882008015625,6.8795744496187305,ms/op
+com.github.peshkovm.lab2.PerformanceTest.TreeBarrierAccelerationTest.await_2_thread-SingleShotTime,SingleShotTime,40,2,0.11316673749999999,0.20925910025473984,ms/op
+com.github.peshkovm.lab2.PerformanceTest.TreeBarrierAccelerationTest.await_32_thread-SingleShotTime,SingleShotTime,40,32,62.18423742343752,9.822181330559744,ms/op
+com.github.peshkovm.lab2.PerformanceTest.TreeBarrierAccelerationTest.await_4_thread-SingleShotTime,SingleShotTime,40,4,2.1272546250000004,1.116004376580573,ms/op
