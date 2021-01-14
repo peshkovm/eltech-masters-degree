@@ -1,0 +1,1051 @@
+<html>
+<head>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .bgcolor {
+            background-color: #FFFFFF;
+        }
+
+        .hd {
+            background-color: #000000;
+            font-size: 18px;
+            color: #FFFFFF;
+        }
+
+        .sectionheader {
+            background-color: #888888;
+            width:100%;
+            font-size: 16px;
+            font-style: bold;
+            color: #FFFFFF;
+            /*padding-left: 40px;*/
+            /*padding-right: 8px;*/
+            /*padding-top: 2px;*/
+            /*padding-bottom: 2px;*/
+
+        }
+
+        .subsectiontop {
+            background-color: #F5F5FF;
+            height: 300px;
+        }
+
+        .subsectionbottom {
+            background-color: #F5F5FF;
+            height: 540px;
+        }
+
+        h1 {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+            font-size: 28px;
+            font-style: bold;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 26.4px;
+        }
+
+        h3 {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+            font-size: 16px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 26.4px;
+        }
+
+        div.outerelements {
+            padding-bottom: 30px;
+        }
+
+        /** Line charts */
+        path {
+            stroke: steelblue;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .tick line {
+            opacity: 0.2;
+            shape-rendering: crispEdges;
+        }
+
+        /** Bar charts */
+        .bar {
+            fill: steelblue;
+        }
+
+        rect {
+            fill: steelblue;
+        }
+
+        .legend rect {
+            fill:white;
+            stroke:black;
+            opacity:0.8;
+        }
+
+    </style>
+    <title>Data Analysis</title>
+
+</head>
+<body style="padding: 0px; margin: 0px" onload="generateContent()">
+
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+
+    function generateContent(){
+        var mainDiv = $('#maindiv');
+
+        var div2 = $('#tablesource');
+        console.log(div2.html());
+
+        var div2html = div2.html();
+        createTable(jQuery.parseJSON(div2html)["RenderableComponentTable"], "Summary Table", $('#tablediv'));
+
+        var histdiv = $("#histogramdiv");
+
+            var div_histdiv_handTemperature = $('#histdiv_handTemperature');
+            var html_histdiv_handTemperature = div_histdiv_handTemperature.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handTemperature)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handAcc16_1 = $('#histdiv_handAcc16_1');
+            var html_histdiv_handAcc16_1 = div_histdiv_handAcc16_1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handAcc16_1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handAcc16_2 = $('#histdiv_handAcc16_2');
+            var html_histdiv_handAcc16_2 = div_histdiv_handAcc16_2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handAcc16_2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handAcc16_3 = $('#histdiv_handAcc16_3');
+            var html_histdiv_handAcc16_3 = div_histdiv_handAcc16_3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handAcc16_3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handAcc6_1 = $('#histdiv_handAcc6_1');
+            var html_histdiv_handAcc6_1 = div_histdiv_handAcc6_1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handAcc6_1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handAcc6_2 = $('#histdiv_handAcc6_2');
+            var html_histdiv_handAcc6_2 = div_histdiv_handAcc6_2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handAcc6_2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handAcc6_3 = $('#histdiv_handAcc6_3');
+            var html_histdiv_handAcc6_3 = div_histdiv_handAcc6_3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handAcc6_3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handMagne1 = $('#histdiv_handMagne1');
+            var html_histdiv_handMagne1 = div_histdiv_handMagne1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handMagne1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handMagne2 = $('#histdiv_handMagne2');
+            var html_histdiv_handMagne2 = div_histdiv_handMagne2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handMagne2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_handMagne3 = $('#histdiv_handMagne3');
+            var html_histdiv_handMagne3 = div_histdiv_handMagne3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_handMagne3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestTemperature = $('#histdiv_chestTemperature');
+            var html_histdiv_chestTemperature = div_histdiv_chestTemperature.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestTemperature)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestAcc16_1 = $('#histdiv_chestAcc16_1');
+            var html_histdiv_chestAcc16_1 = div_histdiv_chestAcc16_1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestAcc16_1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestAcc16_2 = $('#histdiv_chestAcc16_2');
+            var html_histdiv_chestAcc16_2 = div_histdiv_chestAcc16_2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestAcc16_2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestAcc16_3 = $('#histdiv_chestAcc16_3');
+            var html_histdiv_chestAcc16_3 = div_histdiv_chestAcc16_3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestAcc16_3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestAcc6_1 = $('#histdiv_chestAcc6_1');
+            var html_histdiv_chestAcc6_1 = div_histdiv_chestAcc6_1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestAcc6_1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestAcc6_2 = $('#histdiv_chestAcc6_2');
+            var html_histdiv_chestAcc6_2 = div_histdiv_chestAcc6_2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestAcc6_2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestAcc6_3 = $('#histdiv_chestAcc6_3');
+            var html_histdiv_chestAcc6_3 = div_histdiv_chestAcc6_3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestAcc6_3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestMagne1 = $('#histdiv_chestMagne1');
+            var html_histdiv_chestMagne1 = div_histdiv_chestMagne1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestMagne1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestMagne2 = $('#histdiv_chestMagne2');
+            var html_histdiv_chestMagne2 = div_histdiv_chestMagne2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestMagne2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_chestMagne3 = $('#histdiv_chestMagne3');
+            var html_histdiv_chestMagne3 = div_histdiv_chestMagne3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_chestMagne3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleTemperature = $('#histdiv_ankleTemperature');
+            var html_histdiv_ankleTemperature = div_histdiv_ankleTemperature.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleTemperature)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleAcc16_1 = $('#histdiv_ankleAcc16_1');
+            var html_histdiv_ankleAcc16_1 = div_histdiv_ankleAcc16_1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleAcc16_1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleAcc16_2 = $('#histdiv_ankleAcc16_2');
+            var html_histdiv_ankleAcc16_2 = div_histdiv_ankleAcc16_2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleAcc16_2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleAcc16_3 = $('#histdiv_ankleAcc16_3');
+            var html_histdiv_ankleAcc16_3 = div_histdiv_ankleAcc16_3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleAcc16_3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleAcc6_1 = $('#histdiv_ankleAcc6_1');
+            var html_histdiv_ankleAcc6_1 = div_histdiv_ankleAcc6_1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleAcc6_1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleAcc6_2 = $('#histdiv_ankleAcc6_2');
+            var html_histdiv_ankleAcc6_2 = div_histdiv_ankleAcc6_2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleAcc6_2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleAcc6_3 = $('#histdiv_ankleAcc6_3');
+            var html_histdiv_ankleAcc6_3 = div_histdiv_ankleAcc6_3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleAcc6_3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleMagne1 = $('#histdiv_ankleMagne1');
+            var html_histdiv_ankleMagne1 = div_histdiv_ankleMagne1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleMagne1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleMagne2 = $('#histdiv_ankleMagne2');
+            var html_histdiv_ankleMagne2 = div_histdiv_ankleMagne2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleMagne2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_ankleMagne3 = $('#histdiv_ankleMagne3');
+            var html_histdiv_ankleMagne3 = div_histdiv_ankleMagne3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_ankleMagne3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+
+    }
+
+    function createTable(tableObj, tableId, appendTo) {
+        //Expect RenderableComponentTable
+        var header = tableObj['header'];
+        var values = tableObj['table'];
+        var title = tableObj['title'];
+        var border = tableObj['border'];
+        var padLeft = tableObj['padLeftPx'];
+        var padRight = tableObj['padRightPx'];
+        var padTop = tableObj['padTopPx'];
+        var padBottom = tableObj['padBottomPx'];
+        var colWidths = tableObj['colWidthsPercent'];
+        var nRows = (values ? values.length : 0);
+        var backgroundColor = tableObj['backgroundColor'];
+        var headerColor = tableObj['headerColor'];
+
+
+        var tbl = document.createElement('table');
+        tbl.style.width = '100%';
+//        tbl.style.height = '100%';
+        tbl.setAttribute('border', border);
+        if(backgroundColor) tbl.style.backgroundColor = backgroundColor;
+
+        if (colWidths) {
+            for (var i = 0; i < colWidths.length; i++) {
+                var col = document.createElement('col');
+                col.setAttribute('width', colWidths[i] + '%');
+                tbl.appendChild(col);
+            }
+        }
+
+        if (header) {
+            var theader = document.createElement('thead');
+            var headerRow = document.createElement('tr');
+
+            if(headerColor) headerRow.style.backgroundColor = headerColor;
+
+            for (var i = 0; i < header.length; i++) {
+                var headerd = document.createElement('th');
+                headerd.style.padding = padTop + 'px ' + padRight + 'px ' + padBottom + 'px ' + padLeft + 'px';
+                headerd.appendChild(document.createTextNode(header[i]));
+                headerRow.appendChild(headerd);
+            }
+            tbl.appendChild(headerRow);
+        }
+
+        //Add content:
+        if (values) {
+
+            var tbdy = document.createElement('tbody');
+            for (var i = 0; i < values.length; i++) {
+                var tr = document.createElement('tr');
+
+                for (var j = 0; j < values[i].length; j++) {
+                    var td = document.createElement('td');
+                    td.style.padding = padTop + 'px ' + padRight + 'px ' + padBottom + 'px ' + padLeft + 'px';
+                    td.appendChild(document.createTextNode(values[i][j]));
+                    tr.appendChild(td);
+                }
+
+                tbdy.appendChild(tr);
+            }
+            tbl.appendChild(tbdy);
+        }
+
+        appendTo.append(tbl);
+    }
+
+    /** Create + add line chart with multiple lines, (optional) title, (optional) series names.
+     * appendTo: jquery selector of object to append to. MUST HAVE ID
+     * */
+    function createLineChart(chartObj, appendTo, chartWidth, chartHeight) {
+        //Expect: RenderableComponentLineChart
+        var title = chartObj['title'];
+        var xData = chartObj['x'];
+        var yData = chartObj['y'];
+        var mTop = chartObj['marginTop'];
+        var mBottom = chartObj['marginBottom'];
+        var mLeft = chartObj['marginLeft'];
+        var mRight = chartObj['marginRight'];
+        var removeAxisHorizontal = chartObj['removeAxisHorizontal'];
+        var seriesNames = chartObj['seriesNames'];
+        var withLegend = chartObj['legend'];
+        var nSeries = (!xData ? 0 : xData.length);
+
+        // Set the dimensions of the canvas / graph
+        var margin = {top: mTop, right: mRight, bottom: mBottom, left: mLeft},
+                width = chartWidth - margin.left - margin.right,
+                height = chartHeight - margin.top - margin.bottom;
+
+        // Set the ranges
+        var xScale = d3.scale.linear().range([0, width]);
+        var yScale = d3.scale.linear().range([height, 0]);
+
+        // Define the axes
+        var xAxis = d3.svg.axis().scale(xScale)
+                .innerTickSize(-height)     //used as grid line
+                .orient("bottom").ticks(5);
+
+        if(removeAxisHorizontal == true){
+            xAxis.tickValues([]);
+        }
+
+        var yAxis = d3.svg.axis().scale(yScale)
+                .innerTickSize(-width)      //used as grid line
+                .orient("left").ticks(5);
+
+        // Define the line
+        var valueline = d3.svg.line()
+                .x(function (d) {
+                    return xScale(d.xPos);
+                })
+                .y(function (d) {
+                    return yScale(d.yPos);
+                });
+
+        // Adds the svg canvas
+        var svg = d3.select("#" + appendTo.attr("id"))
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("padding", "20px")
+                .append("g")
+                .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+        // Scale the range of the chart
+        var xMin = Number.MAX_VALUE;
+        var xMax = -Number.MAX_VALUE;
+        var yMax = -Number.MAX_VALUE;
+        var yMin = Number.MAX_VALUE;
+        for (var i = 0; i < nSeries; i++) {
+            var xV = xData[i];
+            var yV = yData[i];
+            var thisMin = d3.min(xV);
+            var thisMax = d3.max(xV);
+            var thisMaxY = d3.max(yV);
+            var thisMinY = d3.min(yV);
+            if (thisMin < xMin) xMin = thisMin;
+            if (thisMax > xMax) xMax = thisMax;
+            if (thisMaxY > yMax) yMax = thisMaxY;
+            if (thisMinY < yMin) yMin = thisMinY;
+        }
+        if (yMin > 0) yMin = 0;
+        xScale.domain([xMin, xMax]);
+        yScale.domain([yMin, yMax]);
+
+        // Add the valueline path.
+        var color = d3.scale.category10();
+        for (var i = 0; i < nSeries; i++) {
+            var xVals = xData[i];
+            var yVals = yData[i];
+
+            var data = xVals.map(function (d, i) {
+                return {'xPos': xVals[i], 'yPos': yVals[i]};
+            });
+            svg.append("path")
+                    .attr("class", "line")
+                    .style("stroke", color(i))
+                    .attr("d", valueline(data));
+        }
+
+        // Add the X Axis
+        svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+        // Add the Y Axis
+        svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+        //Add legend (if present)
+        if (seriesNames && withLegend == true) {
+            var legendSpace = width / i;
+            for (var i = 0; i < nSeries; i++) {
+                var values = xData[i];
+                var yValues = yData[i];
+                var lastX = values[values.length - 1];
+                var lastY = yValues[yValues.length - 1];
+                var toDisplay;
+                if (!lastX || !lastY) toDisplay = seriesNames[i] + " (no data)";
+                else toDisplay = seriesNames[i] + " (" + lastX.toPrecision(5) + "," + lastY.toPrecision(5) + ")";
+                svg.append("text")
+                        .attr("x", (legendSpace / 2) + i * legendSpace) // spacing
+                        .attr("y", height + (margin.bottom / 2) + 5)
+                        .attr("class", "legend")    // style the legend
+                        .style("fill", color(i))
+                        .text(toDisplay);
+
+            }
+        }
+
+        //Add title (if present)
+        if (title) {
+            svg.append("text")
+                    .attr("x", (width / 2))
+                    .attr("y", 0 - ((margin.top - 30) / 2))
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "13px")
+                    .style("text-decoration", "underline")
+                    .text(title);
+        }
+    }
+
+    /** Create + add histogram
+     * */
+    function createHistogram(chartObj, appendTo, chartWidth, chartHeight) {
+        //Expect: RenderableComponentHistogram
+        var title = chartObj['title'];
+        var lowerBounds = chartObj['lowerBounds'];
+        var upperBounds = chartObj['upperBounds'];
+        var yValues = chartObj['yvalues'];
+        var mTop = chartObj['marginTop'];
+        var mBottom = chartObj['marginBottom'];
+        var mLeft = chartObj['marginLeft'];
+        var mRight = chartObj['marginRight'];
+//        var removeAxisHorizontal = chartObj['removeAxisHorizontal'];
+
+        // Set the dimensions of the canvas / graph
+        var margin = {top: mTop, right: mRight, bottom: mBottom, left: mLeft},
+                width = chartWidth - margin.left - margin.right,
+                height = chartHeight - margin.top - margin.bottom;
+
+        // Set the ranges
+        var xScale = d3.scale.linear().range([0, width]);
+        var yScale = d3.scale.linear().range([height, 0]);
+
+        var xMin = Number.MAX_VALUE;
+        var xMax = -Number.MAX_VALUE;
+        var yMax = -Number.MAX_VALUE;
+        for (var i = 0; i < lowerBounds.length; i++) {
+            if (lowerBounds[i] < xMin) xMin = lowerBounds[i];
+            if (upperBounds[i] > xMax) xMax = upperBounds[i];
+            if (yValues[i] > yMax) yMax = yValues[i];
+        }
+
+        // Define the axes
+        var xAxis = d3.scale.linear()
+                .domain([xMin, xMax])
+                .range([0, width]);
+
+        var yAxis = d3.scale.linear()
+                .domain([0, yMax])
+                .range([height, 0]);
+
+        // Set up the data:
+        var data = lowerBounds.map(function (d, i) {
+            return {'width': upperBounds[i] - lowerBounds[i], 'height': yValues[i], 'offset': lowerBounds[i]};
+        });
+
+
+        // Adds the svg canvas
+        var svg = d3.select("#" + appendTo.attr("id"))
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("padding", "20px")
+                .append("g")
+                .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+        // Add the bins.
+        svg.selectAll(".bin")
+                .data(data)
+                .enter().append("rect")
+                .attr("class", "bin")
+                .attr("x", function(d) { return xAxis(d.offset); })
+                .attr("width", function(d) { return xAxis(xMin + d.width) - 1; })
+                .attr("y", function(d) { return yAxis(d.height); })
+                .attr("height", function(d) { return height - yAxis(d.height); });
+
+        svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.svg.axis()
+                        .scale(xAxis)
+                        .orient("bottom"));
+
+        svg.append("g")
+                .attr("class", "y axis")
+                .call(d3.svg.axis()
+                        .scale(yAxis)
+                        .orient("left"));
+
+        //Add title (if present)
+        if (title) {
+            svg.append("text")
+                    .attr("x", (width / 2))
+                    .attr("y", 0 - ((margin.top - 30) / 2))
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "13px")
+                    .style("text-decoration", "underline")
+                    .text(title);
+        }
+    }
+</script>
+
+<table style="width: 100%; padding: 5px" class="hd">
+    <tbody>
+    <tr>
+        <td style="width:15px; height:35px; padding: 4px 15px;">
+        <td>Data Analysis</td>
+        <td style="text-align:right">2021-01-14 10:51:45 +00:00</td>
+        <td style="width:15px; height:35px; padding: 4px 15px;">
+    </tr>
+    </tbody>
+</table>
+
+<div style="width:1400px; margin:0 auto; border:0px" id="outerdiv">
+    <div style="width:100%; padding-top:20px" id="maindiv">
+        <div style="width:100%; height:20px"></div>
+        <div style="width:100%;" class="sectionheader">
+            <div style="padding-left:40px; padding-top:3px; padding-bottom:3px">
+                Summary Column Analysis
+            </div>
+        </div>
+        <div style="width:100%; height:auto" align="center" id="tablediv">
+
+        </div>
+
+        <div style="width:100%; height:20px"></div>
+        <div style="width:100%;" class="sectionheader">
+            <div style="padding-left:40px; padding-top:3px; padding-bottom:3px">
+                Numerical Column Histograms
+            </div>
+        </div>
+        <div style="width:100%; height:auto" align="center" id="histogramdiv">
+
+        </div>
+
+    </div>
+</div>
+
+<div id="histdiv_handTemperature" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 24.875, 25.93125, 26.9875, 28.04375, 29.1, 30.15625, 31.2125, 32.26875, 33.325, 34.38125 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handTemperature",
+    "upperBounds" : [ 25.93125, 26.9875, 28.04375, 29.1, 30.15625, 31.2125, 32.26875, 33.325, 34.38125, 35.4375 ],
+    "yvalues" : [ 11.0, 0.0, 12.0, 44.0, 33.0, 121.0, 121.0, 187.0, 288.0, 154.0 ]
+  }
+}
+</div>
+<div id="histdiv_handAcc16_1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -10.0121, -8.202094, -6.392088, -4.582082, -2.772076, -0.9620700000000006, 0.8479360000000007, 2.6579420000000002, 4.467948, 6.277954000000001 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handAcc16_1",
+    "upperBounds" : [ -8.202094, -6.392088, -4.582082, -2.772076, -0.9620700000000006, 0.8479360000000007, 2.6579420000000002, 4.467948, 6.277954000000001, 8.08796 ],
+    "yvalues" : [ 390.0, 65.0, 61.0, 58.0, 103.0, 47.0, 162.0, 60.0, 14.0, 11.0 ]
+  }
+}
+</div>
+<div id="histdiv_handAcc16_2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -13.5247, -11.03803, -8.551359999999999, -6.064689999999999, -3.5780199999999986, -1.0913499999999985, 1.3953200000000017, 3.881990000000002, 6.368660000000002, 8.855330000000002 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handAcc16_2",
+    "upperBounds" : [ -11.03803, -8.551359999999999, -6.064689999999999, -3.5780199999999986, -1.0913499999999985, 1.3953200000000017, 3.881990000000002, 6.368660000000002, 8.855330000000002, 11.342 ],
+    "yvalues" : [ 6.0, 16.0, 24.0, 10.0, 65.0, 27.0, 394.0, 107.0, 203.0, 119.0 ]
+  }
+}
+</div>
+<div id="histdiv_handAcc16_3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -7.57551, -5.814869, -4.054228, -2.2935869999999996, -0.5329459999999999, 1.2276949999999998, 2.988336000000001, 4.748977000000001, 6.509618000000001, 8.270259 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handAcc16_3",
+    "upperBounds" : [ -5.814869, -4.054228, -2.2935869999999996, -0.5329459999999999, 1.2276949999999998, 2.988336000000001, 4.748977000000001, 6.509618000000001, 8.270259, 10.0309 ],
+    "yvalues" : [ 40.0, 4.0, 23.0, 33.0, 126.0, 245.0, 248.0, 116.0, 102.0, 34.0 ]
+  }
+}
+</div>
+<div id="histdiv_handAcc6_1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -9.7669, -7.981211999999999, -6.195524, -4.409836, -2.624148, -0.8384599999999995, 0.9472279999999991, 2.7329159999999995, 4.518604, 6.304292 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handAcc6_1",
+    "upperBounds" : [ -7.981211999999999, -6.195524, -4.409836, -2.624148, -0.8384599999999995, 0.9472279999999991, 2.7329159999999995, 4.518604, 6.304292, 8.08998 ],
+    "yvalues" : [ 409.0, 53.0, 56.0, 59.0, 102.0, 37.0, 163.0, 58.0, 23.0, 11.0 ]
+  }
+}
+</div>
+<div id="histdiv_handAcc6_2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -13.561, -11.08641, -8.61182, -6.13723, -3.6626399999999997, -1.1880500000000005, 1.2865400000000005, 3.7611300000000014, 6.235720000000001, 8.71031 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handAcc6_2",
+    "upperBounds" : [ -11.08641, -8.61182, -6.13723, -3.6626399999999997, -1.1880500000000005, 1.2865400000000005, 3.7611300000000014, 6.235720000000001, 8.71031, 11.1849 ],
+    "yvalues" : [ 7.0, 15.0, 23.0, 10.0, 66.0, 25.0, 375.0, 124.0, 189.0, 137.0 ]
+  }
+}
+</div>
+<div id="histdiv_handAcc6_3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -7.4443, -5.705974, -3.967648, -2.229322, -0.490996, 1.2473299999999998, 2.9856560000000005, 4.7239819999999995, 6.462308, 8.200634 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handAcc6_3",
+    "upperBounds" : [ -5.705974, -3.967648, -2.229322, -0.490996, 1.2473299999999998, 2.9856560000000005, 4.7239819999999995, 6.462308, 8.200634, 9.93896 ],
+    "yvalues" : [ 39.0, 4.0, 24.0, 33.0, 93.0, 253.0, 241.0, 140.0, 89.0, 55.0 ]
+  }
+}
+</div>
+<div id="histdiv_handMagne1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -46.256, -31.79923, -17.34246, -2.8856899999999968, 11.571080000000002, 26.02785, 40.48462000000001, 54.94139, 69.39816, 83.85493 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handMagne1",
+    "upperBounds" : [ -31.79923, -17.34246, -2.8856899999999968, 11.571080000000002, 26.02785, 40.48462000000001, 54.94139, 69.39816, 83.85493, 98.3117 ],
+    "yvalues" : [ 33.0, 44.0, 99.0, 178.0, 157.0, 296.0, 142.0, 11.0, 0.0, 11.0 ]
+  }
+}
+</div>
+<div id="histdiv_handMagne2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -117.826, -101.70106, -85.57612, -69.45118, -53.32624, -37.2013, -21.076359999999994, -4.951419999999999, 11.173519999999996, 27.298460000000006 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handMagne2",
+    "upperBounds" : [ -101.70106, -85.57612, -69.45118, -53.32624, -37.2013, -21.076359999999994, -4.951419999999999, 11.173519999999996, 27.298460000000006, 43.4234 ],
+    "yvalues" : [ 11.0, 0.0, 0.0, 55.0, 87.0, 316.0, 224.0, 198.0, 58.0, 22.0 ]
+  }
+}
+</div>
+<div id="histdiv_handMagne3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -94.0717, -81.42986, -68.78802, -56.14618000000001, -43.504340000000006, -30.862500000000004, -18.22066000000001, -5.578820000000007, 7.0630199999999945, 19.704859999999996 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "handMagne3",
+    "upperBounds" : [ -81.42986, -68.78802, -56.14618000000001, -43.504340000000006, -30.862500000000004, -18.22066000000001, -5.578820000000007, 7.0630199999999945, 19.704859999999996, 32.3467 ],
+    "yvalues" : [ 11.0, 0.0, 30.0, 3.0, 165.0, 286.0, 264.0, 145.0, 34.0, 33.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestTemperature" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 31.9375, 32.59375, 33.25, 33.90625, 34.5625, 35.21875, 35.875, 36.53125, 37.1875, 37.84375 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestTemperature",
+    "upperBounds" : [ 32.59375, 33.25, 33.90625, 34.5625, 35.21875, 35.875, 36.53125, 37.1875, 37.84375, 38.5 ],
+    "yvalues" : [ 56.0, 11.0, 44.0, 99.0, 77.0, 110.0, 123.0, 176.0, 154.0, 121.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestAcc16_1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -1.67201, -1.2214260000000001, -0.770842, -0.32025800000000015, 0.13032599999999994, 0.58091, 1.0314939999999997, 1.4820779999999998, 1.9326619999999999, 2.3832459999999998 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestAcc16_1",
+    "upperBounds" : [ -1.2214260000000001, -0.770842, -0.32025800000000015, 0.13032599999999994, 0.58091, 1.0314939999999997, 1.4820779999999998, 1.9326619999999999, 2.3832459999999998, 2.83383 ],
+    "yvalues" : [ 15.0, 30.0, 93.0, 108.0, 180.0, 257.0, 117.0, 81.0, 70.0, 20.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestAcc16_2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 6.14148, 6.575591999999999, 7.009703999999999, 7.443816, 7.877928, 8.31204, 8.746151999999999, 9.180264, 9.614376, 10.048487999999999 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestAcc16_2",
+    "upperBounds" : [ 6.575591999999999, 7.009703999999999, 7.443816, 7.877928, 8.31204, 8.746151999999999, 9.180264, 9.614376, 10.048487999999999, 10.4826 ],
+    "yvalues" : [ 8.0, 15.0, 4.0, 18.0, 5.0, 29.0, 42.0, 278.0, 557.0, 15.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestAcc16_3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -8.06341, -7.031165, -5.998919999999999, -4.966674999999999, -3.934429999999999, -2.9021849999999993, -1.8699399999999988, -0.8376949999999983, 0.19455000000000133, 1.226795000000001 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestAcc16_3",
+    "upperBounds" : [ -7.031165, -5.998919999999999, -4.966674999999999, -3.934429999999999, -2.9021849999999993, -1.8699399999999988, -0.8376949999999983, 0.19455000000000133, 1.226795000000001, 2.25904 ],
+    "yvalues" : [ 22.0, 20.0, 39.0, 31.0, 85.0, 44.0, 154.0, 242.0, 259.0, 75.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestAcc6_1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -1.85281, -1.3892350000000002, -0.9256600000000001, -0.4620850000000003, 0.0014899999999997693, 0.46506499999999984, 0.9286399999999995, 1.3922149999999995, 1.8557899999999996, 2.3193649999999995 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestAcc6_1",
+    "upperBounds" : [ -1.3892350000000002, -0.9256600000000001, -0.4620850000000003, 0.0014899999999997693, 0.46506499999999984, 0.9286399999999995, 1.3922149999999995, 1.8557899999999996, 2.3193649999999995, 2.78294 ],
+    "yvalues" : [ 15.0, 23.0, 95.0, 129.0, 177.0, 261.0, 118.0, 66.0, 64.0, 23.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestAcc6_2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 6.27723, 6.698877, 7.1205240000000005, 7.542171, 7.963818, 8.385465, 8.807112, 9.228759, 9.650406, 10.072053 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestAcc6_2",
+    "upperBounds" : [ 6.698877, 7.1205240000000005, 7.542171, 7.963818, 8.385465, 8.807112, 9.228759, 9.650406, 10.072053, 10.4937 ],
+    "yvalues" : [ 14.0, 8.0, 6.0, 17.0, 10.0, 37.0, 55.0, 249.0, 562.0, 13.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestAcc6_3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -7.60468, -6.5848510000000005, -5.565022, -4.545192999999999, -3.5253639999999997, -2.505535, -1.4857059999999995, -0.465876999999999, 0.5539520000000007, 1.5737810000000003 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestAcc6_3",
+    "upperBounds" : [ -6.5848510000000005, -5.565022, -4.545192999999999, -3.5253639999999997, -2.505535, -1.4857059999999995, -0.465876999999999, 0.5539520000000007, 1.5737810000000003, 2.59361 ],
+    "yvalues" : [ 22.0, 26.0, 38.0, 31.0, 81.0, 43.0, 157.0, 226.0, 264.0, 83.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestMagne1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -30.4272, -23.638199999999998, -16.8492, -10.060200000000002, -3.2712000000000003, 3.517800000000001, 10.306799999999996, 17.095799999999997, 23.8848, 30.6738 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestMagne1",
+    "upperBounds" : [ -23.638199999999998, -16.8492, -10.060200000000002, -3.2712000000000003, 3.517800000000001, 10.306799999999996, 17.095799999999997, 23.8848, 30.6738, 37.4628 ],
+    "yvalues" : [ 11.0, 91.0, 90.0, 171.0, 332.0, 100.0, 55.0, 78.0, 29.0, 14.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestMagne2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -71.4365, -65.19682499999999, -58.95715, -52.71747499999999, -46.477799999999995, -40.238125, -33.99844999999999, -27.758774999999993, -21.519099999999995, -15.279424999999996 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestMagne2",
+    "upperBounds" : [ -65.19682499999999, -58.95715, -52.71747499999999, -46.477799999999995, -40.238125, -33.99844999999999, -27.758774999999993, -21.519099999999995, -15.279424999999996, -9.03975 ],
+    "yvalues" : [ 11.0, 11.0, 44.0, 56.0, 65.0, 185.0, 307.0, 222.0, 15.0, 55.0 ]
+  }
+}
+</div>
+<div id="histdiv_chestMagne3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -24.5786, -17.492310000000003, -10.406020000000002, -3.31973, 3.7665599999999984, 10.852849999999997, 17.939140000000002, 25.02543, 32.11172, 39.19801 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "chestMagne3",
+    "upperBounds" : [ -17.492310000000003, -10.406020000000002, -3.31973, 3.7665599999999984, 10.852849999999997, 17.939140000000002, 25.02543, 32.11172, 39.19801, 46.2843 ],
+    "yvalues" : [ 41.0, 118.0, 176.0, 173.0, 155.0, 99.0, 87.0, 87.0, 2.0, 33.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleTemperature" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 30.0, 30.54375, 31.0875, 31.63125, 32.175, 32.71875, 33.2625, 33.80625, 34.35, 34.89375 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleTemperature",
+    "upperBounds" : [ 30.54375, 31.0875, 31.63125, 32.175, 32.71875, 33.2625, 33.80625, 34.35, 34.89375, 35.4375 ],
+    "yvalues" : [ 22.0, 11.0, 33.0, 88.0, 55.0, 100.0, 110.0, 253.0, 209.0, 90.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleAcc16_1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -0.261643, 0.8403712999999999, 1.9423856, 3.0443999, 4.1464142, 5.2484285, 6.3504428, 7.452457099999999, 8.5544714, 9.656485700000001 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleAcc16_1",
+    "upperBounds" : [ 0.8403712999999999, 1.9423856, 3.0443999, 4.1464142, 5.2484285, 6.3504428, 7.452457099999999, 8.5544714, 9.656485700000001, 10.7585 ],
+    "yvalues" : [ 11.0, 0.0, 0.0, 0.0, 1.0, 4.0, 4.0, 2.0, 566.0, 383.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleAcc16_2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -3.41938, -2.1143029999999996, -0.8092259999999998, 0.4958510000000005, 1.8009280000000003, 3.106005, 4.411082, 5.716158999999999, 7.021236, 8.326313 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleAcc16_2",
+    "upperBounds" : [ -2.1143029999999996, -0.8092259999999998, 0.4958510000000005, 1.8009280000000003, 3.106005, 4.411082, 5.716158999999999, 7.021236, 8.326313, 9.63139 ],
+    "yvalues" : [ 23.0, 202.0, 549.0, 144.0, 31.0, 11.0, 0.0, 0.0, 0.0, 11.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleAcc16_3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -4.7047, -4.04901, -3.39332, -2.73763, -2.08194, -1.42625, -0.7705599999999997, -0.1148699999999998, 0.5408200000000001, 1.19651 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleAcc16_3",
+    "upperBounds" : [ -4.04901, -3.39332, -2.73763, -2.08194, -1.42625, -0.7705599999999997, -0.1148699999999998, 0.5408200000000001, 1.19651, 1.8522 ],
+    "yvalues" : [ 56.0, 108.0, 130.0, 227.0, 169.0, 126.0, 88.0, 55.0, 1.0, 11.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleAcc6_1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -0.121648, 0.9974867999999999, 2.1166215999999998, 3.2357563999999996, 4.354891199999999, 5.4740259999999985, 6.593160799999999, 7.712295599999999, 8.831430399999999, 9.950565199999998 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleAcc6_1",
+    "upperBounds" : [ 0.9974867999999999, 2.1166215999999998, 3.2357563999999996, 4.354891199999999, 5.4740259999999985, 6.593160799999999, 7.712295599999999, 8.831430399999999, 9.950565199999998, 11.0697 ],
+    "yvalues" : [ 11.0, 0.0, 0.0, 0.0, 2.0, 4.0, 4.0, 1.0, 929.0, 20.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleAcc6_2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -3.38862, -2.090608, -0.7925960000000001, 0.5054159999999999, 1.8034279999999998, 3.1014399999999998, 4.399452, 5.697464, 6.995476, 8.293488 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleAcc6_2",
+    "upperBounds" : [ -2.090608, -0.7925960000000001, 0.5054159999999999, 1.8034279999999998, 3.1014399999999998, 4.399452, 5.697464, 6.995476, 8.293488, 9.5915 ],
+    "yvalues" : [ 21.0, 196.0, 517.0, 182.0, 32.0, 12.0, 0.0, 0.0, 0.0, 11.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleAcc6_3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -4.2125, -3.5694280000000003, -2.926356, -2.283284, -1.640212, -0.9971399999999999, -0.3540679999999998, 0.28900400000000026, 0.9320760000000003, 1.5751480000000004 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleAcc6_3",
+    "upperBounds" : [ -3.5694280000000003, -2.926356, -2.283284, -1.640212, -0.9971399999999999, -0.3540679999999998, 0.28900400000000026, 0.9320760000000003, 1.5751480000000004, 2.21822 ],
+    "yvalues" : [ 73.0, 119.0, 113.0, 210.0, 166.0, 122.0, 92.0, 65.0, 0.0, 11.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleMagne1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -98.6615, -88.433631, -78.20576200000001, -67.977893, -57.750024, -47.522155000000005, -37.294286, -27.066417, -16.838548000000003, -6.610679000000005 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleMagne1",
+    "upperBounds" : [ -88.433631, -78.20576200000001, -67.977893, -57.750024, -47.522155000000005, -37.294286, -27.066417, -16.838548000000003, -6.610679000000005, 3.61719 ],
+    "yvalues" : [ 11.0, 22.0, 0.0, 44.0, 78.0, 186.0, 235.0, 190.0, 124.0, 81.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleMagne2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -56.6984, -47.02939, -37.36038, -27.69137, -18.02236, -8.353349999999999, 1.3156600000000012, 10.984670000000001, 20.65368, 30.32269 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleMagne2",
+    "upperBounds" : [ -47.02939, -37.36038, -27.69137, -18.02236, -8.353349999999999, 1.3156600000000012, 10.984670000000001, 20.65368, 30.32269, 39.9917 ],
+    "yvalues" : [ 22.0, 21.0, 34.0, 22.0, 134.0, 286.0, 133.0, 167.0, 53.0, 99.0 ]
+  }
+}
+</div>
+<div id="histdiv_ankleMagne3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ -59.3487, -47.24078, -35.13286, -23.02494, -10.91702, 1.1908999999999992, 13.29882, 25.406739999999992, 37.51466, 49.622580000000006 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "ankleMagne3",
+    "upperBounds" : [ -47.24078, -35.13286, -23.02494, -10.91702, 1.1908999999999992, 13.29882, 25.406739999999992, 37.51466, 49.622580000000006, 61.7305 ],
+    "yvalues" : [ 22.0, 0.0, 18.0, 79.0, 99.0, 229.0, 235.0, 142.0, 90.0, 57.0 ]
+  }
+}
+</div>
+<div id="tablesource" style="display:none">
+{
+  "RenderableComponentTable" : {
+    "backgroundColor" : "#FFFFFF",
+    "border" : 1,
+    "colWidthsPercent" : [ 20.0, 10.0, 70.0 ],
+    "componentType" : "simpletable",
+    "header" : [ "Column Name", "Column Type", "Column Analysis" ],
+    "headerColor" : "#CCCCCC",
+    "padBottomPx" : 0,
+    "padLeftPx" : 4,
+    "padRightPx" : 4,
+    "padTopPx" : 0,
+    "table" : [ [ "activityID", "Categorical", "CategoricalAnalysis(CategoryCounts={7=176,  0=88,  2=88,  3=88,  9=88,  10=79,  1=77,  5=77,  6=77,  4=67,  11=66})" ], [ "handTemperature", "Double", "DoubleAnalysis(min=24.875, max=35.4375, mean=32.629891864057655, sampleStDev=1.9414430813945023, sampleVariance=3.7692012382945803, countZero=0, countNegative=0, countPositive=971, countMinValue=11, countMaxValue=11, count=971,  quantiles=[0.001 : 24.875, 0.01 : 24.875, 0.1 : 30.026171875000003, 0.5 : 33.110207100591715, 0.9 : 34.6875, 0.99 : 35.40421875, 0.999 : 35.4375])" ], [ "handAcc16_1", "Double", "DoubleAnalysis(min=-10.0121, max=8.08796, mean=-4.196266911328525, sampleStDev=4.949492424633297, sampleVariance=24.497475261502395, countZero=0, countNegative=700, countPositive=271, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -9.99115934, 0.01 : -9.697800826666665, 0.1 : -9.3006874248366, 0.5 : -4.993479934318555, 0.9 : 2.5757614999999996, 0.99 : 7.304025599999974, 0.999 : 8.06104706])" ], [ "handAcc16_2", "Double", "DoubleAnalysis(min=-13.5247, max=11.342, mean=3.840425960865084, sampleStDev=4.419865659579046, sampleVariance=19.535212448726117, countZero=0, countNegative=143, countPositive=828, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -13.4012509, 0.01 : -10.33449725, 0.1 : -1.7254225587301586, 0.5 : 3.430743494897959, 0.9 : 9.043208765625, 0.99 : 9.823193175, 0.999 : 11.2527455])" ], [ "handAcc16_3", "Double", "DoubleAnalysis(min=-7.57551, max=10.0309, mean=2.9416817586714714, sampleStDev=3.317134604230822, sampleVariance=11.003381982585571, countZero=0, countNegative=110, countPositive=861, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -7.5754158, 0.01 : -7.281901550000001, 0.1 : -0.959043242857142, 0.5 : 3.073450864197531, 0.9 : 7.43107869387755, 0.99 : 8.854023599999996, 0.999 : 9.90425281])" ], [ "handAcc6_1", "Double", "DoubleAnalysis(min=-9.7669, max=8.08998, mean=-4.088693649045317, sampleStDev=4.947743518413602, sampleVariance=24.48016592400381, countZero=0, countNegative=701, countPositive=270, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -9.75276529, 0.01 : -9.5847281, 0.1 : -9.1581254375, 0.5 : -4.961577897435897, 0.9 : 2.701314967320261, 0.99 : 7.4287643249999755, 0.999 : 8.08430916])" ], [ "handAcc6_2", "Double", "DoubleAnalysis(min=-13.561, max=11.1849, mean=3.8566911493305773, sampleStDev=4.426698995969594, sampleVariance=19.59566400091821, countZero=0, countNegative=143, countPositive=828, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -13.526758300000001, 0.01 : -10.530292, 0.1 : -1.7693283636363637, 0.5 : 3.481950443349754, 0.9 : 8.988756500000001, 0.99 : 9.781093499999999, 0.999 : 11.1774582])" ], [ "handAcc6_3", "Double", "DoubleAnalysis(min=-7.4443, max=9.93896, mean=3.119591944902164, sampleStDev=3.3331039196292838, sampleVariance=11.109581739048094, countZero=0, countNegative=106, countPositive=865, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -7.444267030000001, 0.01 : -7.385991150000001, 0.1 : -0.8875763999999996, 0.5 : 3.2739196, 0.9 : 7.593641023809524, 0.99 : 9.0329135, 0.999 : 9.86058089])" ], [ "handMagne1", "Double", "DoubleAnalysis(min=-46.256, max=98.3117, mean=18.7667566429454, sampleStDev=24.14940537123573, sampleVariance=583.193779784269, countZero=0, countNegative=210, countPositive=761, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -46.247380699999994, 0.01 : -45.39479599999999, 0.1 : -13.079569599999996, 0.5 : 24.70873372781065, 0.9 : 43.56741142857144, 0.99 : 97.0434005, 0.999 : 98.205254])" ], [ "handMagne2", "Double", "DoubleAnalysis(min=-117.826, max=43.4234, mean=-19.199027461688992, sampleStDev=23.329941733866814, sampleVariance=544.2861813056205, countZero=0, countNegative=840, countPositive=131, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -117.714844, 0.01 : -116.94439000000001, 0.1 : -43.798421726190476, 0.5 : -19.49752761904762, 0.9 : 6.61348931282051, 0.99 : 41.42052724999993, 0.999 : 43.4199146])" ], [ "handMagne3", "Double", "DoubleAnalysis(min=-94.0717, max=32.3467, mean=-18.567083052420177, sampleStDev=18.85255793850717, sampleVariance=355.41894082476983, countZero=0, countNegative=844, countPositive=127, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -93.6999868, 0.01 : -91.46635275000001, 0.1 : -38.681535555555556, 0.5 : -18.58127081339713, 0.9 : 2.483402985714284, 0.99 : 30.088194399999914, 0.999 : 32.3439682])" ], [ "chestTemperature", "Double", "DoubleAnalysis(min=31.9375, max=38.5, mean=35.99813336766226, sampleStDev=1.6444270609367617, sampleVariance=2.704140358741116, countZero=0, countNegative=0, countPositive=971, countMinValue=11, countMaxValue=11, count=971,  quantiles=[0.001 : 31.9375, 0.01 : 31.9375, 0.1 : 33.6875, 0.5 : 36.36634615384615, 0.9 : 37.97990196078431, 0.99 : 38.5, 0.999 : 38.5])" ], [ "chestAcc16_1", "Double", "DoubleAnalysis(min=-1.67201, max=2.83383, mean=0.6650461304562302, sampleStDev=0.8565321109316865, sampleVariance=0.7336472570570909, countZero=0, countNegative=202, countPositive=769, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -1.63553576, 0.01 : -1.3287099249999998, 0.1 : -0.5444499714285714, 0.5 : 0.6786179866666666, 0.9 : 1.8356014531249996, 0.99 : 2.603195874999997, 0.999 : 2.83195542])" ], [ "chestAcc16_2", "Double", "DoubleAnalysis(min=6.14148, max=10.4826, mean=9.477063707518013, sampleStDev=0.6178836603324511, sampleVariance=0.3817802177058279, countZero=0, countNegative=0, countPositive=971, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : 6.1951174799999995, 0.01 : 6.64132085, 0.1 : 8.91639780952381, 0.5 : 9.658181770451769, 0.9 : 9.85423749090909, 0.99 : 10.14117325, 0.999 : 10.481846399999998])" ], [ "chestAcc16_3", "Double", "DoubleAnalysis(min=-8.06341, max=2.25904, mean=-1.035322586624099, sampleStDev=2.189494819971002, sampleVariance=4.793887566679851, countZero=0, countNegative=572, countPositive=399, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -7.99135642, 0.01 : -7.741059174999999, 0.1 : -4.492997657142856, 0.5 : -0.40033509777777776, 0.9 : 1.0760340799999997, 0.99 : 2.0863738499999993, 0.999 : 2.24134453])" ], [ "chestAcc6_1", "Double", "DoubleAnalysis(min=-1.85281, max=2.78294, mean=0.5415009175901138, sampleStDev=0.8698488216246938, sampleVariance=0.7566369724818683, countZero=0, countNegative=262, countPositive=709, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -1.79598856, 0.01 : -1.547716325, 0.1 : -0.6032083636363637, 0.5 : 0.5370234228438229, 0.9 : 1.786250765625, 0.99 : 2.5433054999999967, 0.999 : 2.76873464])" ], [ "chestAcc6_2", "Double", "DoubleAnalysis(min=6.27723, max=10.4937, mean=9.485675859938189, sampleStDev=0.6241530014213315, sampleVariance=0.38956696918325656, countZero=0, countNegative=0, countPositive=971, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : 6.28429971, 0.01 : 6.631056975, 0.1 : 8.89559816, 0.5 : 9.692952071005918, 0.9 : 9.848851276190477, 0.99 : 10.1206965, 0.999 : 10.493605800000001])" ], [ "chestAcc6_3", "Double", "DoubleAnalysis(min=-7.60468, max=2.59361, mean=-0.6833643994850668, sampleStDev=2.231864078652962, sampleVariance=4.981217265581436, countZero=0, countNegative=488, countPositive=483, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -7.590469929999999, 0.01 : -7.3822874249999995, 0.1 : -4.2679991230769225, 0.5 : -0.037840917142857144, 0.9 : 1.4911154375, 0.99 : 2.49793684, 0.999 : 2.58687941])" ], [ "chestMagne1", "Double", "DoubleAnalysis(min=-30.4272, max=37.4628, mean=-0.07886489425334861, sampleStDev=12.543512605988765, sampleVariance=157.33970849659906, countZero=0, countNegative=512, countPositive=459, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -30.3150078, 0.01 : -29.412856500000004, 0.1 : -17.402203749999998, 0.5 : -0.6588291581632653, 0.9 : 18.262903906249996, 0.99 : 35.859970999999945, 0.999 : 37.4190912])" ], [ "chestMagne2", "Double", "DoubleAnalysis(min=-71.4365, max=-9.03975, mean=-33.49727070030898, sampleStDev=10.845041990391465, sampleVariance=117.61493577335408, countZero=0, countNegative=971, countPositive=0, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -71.3395682, 0.01 : -70.42153300000001, 0.1 : -51.0902368, 0.5 : -31.39004065934066, 0.9 : -23.814692615384615, 0.99 : -10.053901425000001, 0.999 : -9.093721890000001])" ], [ "chestMagne3", "Double", "DoubleAnalysis(min=-24.5786, max=46.2843, mean=5.172201259526265, sampleStDev=15.413976631791146, sampleVariance=237.59067560540353, countZero=0, countNegative=410, countPositive=561, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -24.577234100000002, 0.01 : -23.24901675, 0.1 : -13.392102187499997, 0.5 : 2.793664234693878, 0.9 : 27.007943125, 0.99 : 45.19900349999999, 0.999 : 46.217983200000006])" ], [ "ankleTemperature", "Double", "DoubleAnalysis(min=30.0, max=35.4375, mean=33.59526261585999, sampleStDev=1.2182669563105264, sampleVariance=1.4841743768381142, countZero=0, countNegative=0, countPositive=971, countMinValue=11, countMaxValue=9, count=971,  quantiles=[0.001 : 30.0, 0.01 : 30.0, 0.1 : 31.8125, 0.5 : 33.97537878787878, 0.9 : 34.875, 0.99 : 35.37296875, 0.999 : 35.4375])" ], [ "ankleAcc16_1", "Double", "DoubleAnalysis(min=-0.261643, max=10.7585, mean=9.434724709783719, sampleStDev=1.1072952772918523, sampleVariance=1.2261028311128401, countZero=0, countNegative=11, countPositive=960, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -0.226626976, 0.01 : -0.06051661699999997, 0.1 : 9.181757999999999, 0.5 : 9.600659130434783, 0.9 : 9.845353846153849, 0.99 : 10.20003, 0.999 : 10.6998134])" ], [ "ankleAcc16_2", "Double", "DoubleAnalysis(min=-3.41938, max=9.63139, mean=-0.11518175204119485, sampleStDev=1.4954860563371704, sampleVariance=2.2364785446989024, countZero=0, countNegative=591, countPositive=380, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -3.40199068, 0.01 : -3.289680825, 0.1 : -1.6476285818181815, 0.5 : -0.2693254082840237, 0.9 : 1.1261613593749997, 0.99 : 9.409988549999998, 0.999 : 9.61298332])" ], [ "ankleAcc16_3", "Double", "DoubleAnalysis(min=-4.7047, max=1.8522, mean=-2.08449589107106, sampleStDev=1.2553668662482569, sampleVariance=1.5759459688739688, countZero=0, countNegative=928, countPositive=43, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -4.6501864600000005, 0.01 : -4.367471749999999, 0.1 : -3.7422000666666664, 0.5 : -2.2594442637362637, 0.9 : -0.32057879238095255, 0.99 : 1.4938711749999989, 0.999 : 1.7987462099999996])" ], [ "ankleAcc6_1", "Double", "DoubleAnalysis(min=-0.121648, max=11.0697, mean=9.431733126570563, sampleStDev=1.1057727545357376, sampleVariance=1.2227333846735526, countZero=0, countNegative=11, countPositive=960, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -0.114631513, 0.01 : -0.047594436, 0.1 : 9.161559225490198, 0.5 : 9.611134266666669, 0.9 : 9.811134242857143, 0.99 : 10.21883175, 0.999 : 10.963395299999998])" ], [ "ankleAcc6_2", "Double", "DoubleAnalysis(min=-3.38862, max=9.5915, mean=-0.019662567106076397, sampleStDev=1.5092861510333777, sampleVariance=2.277944685701148, countZero=0, countNegative=580, countPositive=391, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -3.3672271799999995, 0.01 : -3.2988869249999997, 0.1 : -1.560315309090909, 0.5 : -0.1897298311111111, 0.9 : 1.26539575, 0.99 : 9.518079575, 0.999 : 9.59148116])" ], [ "ankleAcc6_3", "Double", "DoubleAnalysis(min=-4.2125, max=2.21822, mean=-1.6501711354891868, sampleStDev=1.2727274749159692, sampleVariance=1.619835225405979, countZero=0, countNegative=856, countPositive=115, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -4.121116580000001, 0.01 : -3.9454027600000003, 0.1 : -3.346458171428571, 0.5 : -1.8425670666666667, 0.9 : 0.1264597625454544, 0.99 : 2.157575225, 0.999 : 2.21115971])" ], [ "ankleMagne1", "Double", "DoubleAnalysis(min=-98.6615, max=3.61719, mean=-32.083567503913486, sampleStDev=18.67351926716377, sampleVariance=348.7003218211365, countZero=0, countNegative=960, countPositive=11, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -98.60841830000001, 0.01 : -97.55113075, 0.1 : -53.86745004761905, 0.5 : -31.871560735785955, 0.9 : -7.277285047619051, 0.99 : 2.814784999999995, 0.999 : 3.6144346499999997])" ], [ "ankleMagne2", "Double", "DoubleAnalysis(min=-56.6984, max=39.9917, mean=2.122138249917612, sampleStDev=19.661563339927355, sampleVariance=386.57707296997535, countZero=0, countNegative=462, countPositive=509, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -56.6370758, 0.01 : -55.69781725, 0.1 : -18.00671886904762, 0.5 : 0.4724000000000001, 0.9 : 30.72680875, 0.99 : 39.37703575, 0.999 : 39.9915116])" ], [ "ankleMagne3", "Double", "DoubleAnalysis(min=-59.3487, max=61.7305, mean=14.80899388259525, sampleStDev=22.43433369642129, sampleVariance=503.2993284023837, countZero=0, countNegative=209, countPositive=762, countMinValue=1, countMaxValue=1, count=971,  quantiles=[0.001 : -59.1248808, 0.01 : -57.833154, 0.1 : -15.963408496732026, 0.5 : 15.662034065934066, 0.9 : 44.64547699999999, 0.99 : 60.15880499999997, 0.999 : 61.614586900000006])" ] ],
+    "title" : null
+  }
+}
+</div>
+
+</body>
+
+</html>
