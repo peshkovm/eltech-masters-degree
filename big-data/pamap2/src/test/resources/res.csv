@@ -1,5 +1,5 @@
 Id,Mode,Cnt,Threads,Score,Error,Units
-com.github.denpeshkov.PerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-numOfThreads-1,AverageTime,20,1,2.349507954100725,0.4747960712728302,ms/op
-com.github.denpeshkov.PerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-numOfThreads-2,AverageTime,20,1,2.3870537958532827,0.33437425100511564,ms/op
-com.github.denpeshkov.PerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-numOfThreads-3,AverageTime,20,1,2.750930808852005,0.6143639559820308,ms/op
-com.github.denpeshkov.PerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-numOfThreads-4,AverageTime,20,1,2.6774460581536474,0.995812650598857,ms/op
+com.github.denpeshkov.PerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-numOfThreads-1,AverageTime,40,1,1.6032314774012408,0.13665850020648623,ms/op
+com.github.denpeshkov.PerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-numOfThreads-2,AverageTime,40,1,1.8459468125042515,0.12658583358458372,ms/op
+com.github.denpeshkov.PerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-numOfThreads-3,AverageTime,40,1,1.930336774031018,0.11813407175887901,ms/op
+com.github.denpeshkov.PerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-numOfThreads-4,AverageTime,40,1,1.954914869381474,0.12972602186893578,ms/op
