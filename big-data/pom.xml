@@ -126,6 +126,21 @@
       <artifactId>httpclient</artifactId>
       <version>4.3.5</version>
     </dependency>
+    <dependency>
+      <groupId>org.deeplearning4j</groupId>
+      <artifactId>deeplearning4j-parallel-wrapper</artifactId>
+      <version>${dl4j-master.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-core</artifactId>
+      <version>1.19</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjdk.jmh</groupId>
+      <artifactId>jmh-generator-annprocess</artifactId>
+      <version>1.19</version>
+    </dependency>
   </dependencies>
 
   <!-- Maven Enforcer: Ensures user has an up to date version of Maven before building -->

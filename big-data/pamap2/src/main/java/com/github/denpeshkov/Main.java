@@ -41,6 +41,9 @@ import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.deeplearning4j.optimize.listeners.TimeIterationListener;
+import org.deeplearning4j.parallelism.ParallelInference;
+import org.deeplearning4j.parallelism.inference.InferenceMode;
 import org.deeplearning4j.ui.api.UIServer;
 import org.deeplearning4j.ui.model.stats.StatsListener;
 import org.deeplearning4j.ui.model.storage.InMemoryStatsStorage;
@@ -322,6 +325,7 @@ public class Main {
                     .build())
             .build();
 
+    final long begin = System.nanoTime();
     final MultiLayerNetwork model = new MultiLayerNetwork(conf);
     model.init();
     // record score once every 100 iterations
@@ -331,11 +335,28 @@ public class Main {
       model.fit(trainingData);
     }
 
+    ParallelInference pi =
+        new ParallelInference.Builder(model)
+            // BATCHED mode is kind of optimization: if number of incoming requests is too high - PI
+            // will be batching individual queries into single batch. If number of requests will be
+            // low - queries will be processed without batching
+            .inferenceMode(InferenceMode.BATCHED)
+
+            // max size of batch for BATCHED mode. you should set this value with respect to your
+            // environment (i.e. gpu memory amounts)
+            .batchLimit(batchSize)
+
+            // set this value to number of available computational devices, either CPUs or GPUs
+            .workers(1)
+            .build();
+
     // evaluate the model on the test set
     Evaluation eval = new Evaluation(numLabelClasses);
-    INDArray output = model.output(testData.getFeatures());
+    INDArray output = pi.output(testData.getFeatures());
     eval.eval(testData.getLabels(), output);
+    final long end = System.nanoTime();
     System.out.println(eval.stats());
+    System.out.println("Evaluation time: " + (end - begin) / 1000 / 1000);
 
     System.out.println("MCC: " + eval.matthewsCorrelation(EvaluationAveraging.Micro));
   }
