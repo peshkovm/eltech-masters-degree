@@ -1,0 +1,614 @@
+<html>
+<head>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .bgcolor {
+            background-color: #FFFFFF;
+        }
+
+        .hd {
+            background-color: #000000;
+            font-size: 18px;
+            color: #FFFFFF;
+        }
+
+        .sectionheader {
+            background-color: #888888;
+            width:100%;
+            font-size: 16px;
+            font-style: bold;
+            color: #FFFFFF;
+            /*padding-left: 40px;*/
+            /*padding-right: 8px;*/
+            /*padding-top: 2px;*/
+            /*padding-bottom: 2px;*/
+
+        }
+
+        .subsectiontop {
+            background-color: #F5F5FF;
+            height: 300px;
+        }
+
+        .subsectionbottom {
+            background-color: #F5F5FF;
+            height: 540px;
+        }
+
+        h1 {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+            font-size: 28px;
+            font-style: bold;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 26.4px;
+        }
+
+        h3 {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+            font-size: 16px;
+            font-style: normal;
+            font-variant: normal;
+            font-weight: 500;
+            line-height: 26.4px;
+        }
+
+        div.outerelements {
+            padding-bottom: 30px;
+        }
+
+        /** Line charts */
+        path {
+            stroke: steelblue;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .axis path, .axis line {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        .tick line {
+            opacity: 0.2;
+            shape-rendering: crispEdges;
+        }
+
+        /** Bar charts */
+        .bar {
+            fill: steelblue;
+        }
+
+        rect {
+            fill: steelblue;
+        }
+
+        .legend rect {
+            fill:white;
+            stroke:black;
+            opacity:0.8;
+        }
+
+    </style>
+    <title>Data Analysis</title>
+
+</head>
+<body style="padding: 0px; margin: 0px" onload="generateContent()">
+
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script>
+
+    function generateContent(){
+        var mainDiv = $('#maindiv');
+
+        var div2 = $('#tablesource');
+        console.log(div2.html());
+
+        var div2html = div2.html();
+        createTable(jQuery.parseJSON(div2html)["RenderableComponentTable"], "Summary Table", $('#tablediv'));
+
+        var histdiv = $("#histogramdiv");
+
+            var div_histdiv_PlateID = $('#histdiv_PlateID');
+            var html_histdiv_PlateID = div_histdiv_PlateID.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_PlateID)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_VehicleBodyType = $('#histdiv_VehicleBodyType');
+            var html_histdiv_VehicleBodyType = div_histdiv_VehicleBodyType.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_VehicleBodyType)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_VehicleMake = $('#histdiv_VehicleMake');
+            var html_histdiv_VehicleMake = div_histdiv_VehicleMake.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_VehicleMake)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_StreetCode1 = $('#histdiv_StreetCode1');
+            var html_histdiv_StreetCode1 = div_histdiv_StreetCode1.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_StreetCode1)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_StreetCode2 = $('#histdiv_StreetCode2');
+            var html_histdiv_StreetCode2 = div_histdiv_StreetCode2.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_StreetCode2)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_StreetCode3 = $('#histdiv_StreetCode3');
+            var html_histdiv_StreetCode3 = div_histdiv_StreetCode3.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_StreetCode3)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+            var div_histdiv_VehicleColor = $('#histdiv_VehicleColor');
+            var html_histdiv_VehicleColor = div_histdiv_VehicleColor.html();
+            createHistogram(jQuery.parseJSON(html_histdiv_VehicleColor)["RenderableComponentHistogram"], histdiv, 700, 400);
+
+
+    }
+
+    function createTable(tableObj, tableId, appendTo) {
+        //Expect RenderableComponentTable
+        var header = tableObj['header'];
+        var values = tableObj['table'];
+        var title = tableObj['title'];
+        var border = tableObj['border'];
+        var padLeft = tableObj['padLeftPx'];
+        var padRight = tableObj['padRightPx'];
+        var padTop = tableObj['padTopPx'];
+        var padBottom = tableObj['padBottomPx'];
+        var colWidths = tableObj['colWidthsPercent'];
+        var nRows = (values ? values.length : 0);
+        var backgroundColor = tableObj['backgroundColor'];
+        var headerColor = tableObj['headerColor'];
+
+
+        var tbl = document.createElement('table');
+        tbl.style.width = '100%';
+//        tbl.style.height = '100%';
+        tbl.setAttribute('border', border);
+        if(backgroundColor) tbl.style.backgroundColor = backgroundColor;
+
+        if (colWidths) {
+            for (var i = 0; i < colWidths.length; i++) {
+                var col = document.createElement('col');
+                col.setAttribute('width', colWidths[i] + '%');
+                tbl.appendChild(col);
+            }
+        }
+
+        if (header) {
+            var theader = document.createElement('thead');
+            var headerRow = document.createElement('tr');
+
+            if(headerColor) headerRow.style.backgroundColor = headerColor;
+
+            for (var i = 0; i < header.length; i++) {
+                var headerd = document.createElement('th');
+                headerd.style.padding = padTop + 'px ' + padRight + 'px ' + padBottom + 'px ' + padLeft + 'px';
+                headerd.appendChild(document.createTextNode(header[i]));
+                headerRow.appendChild(headerd);
+            }
+            tbl.appendChild(headerRow);
+        }
+
+        //Add content:
+        if (values) {
+
+            var tbdy = document.createElement('tbody');
+            for (var i = 0; i < values.length; i++) {
+                var tr = document.createElement('tr');
+
+                for (var j = 0; j < values[i].length; j++) {
+                    var td = document.createElement('td');
+                    td.style.padding = padTop + 'px ' + padRight + 'px ' + padBottom + 'px ' + padLeft + 'px';
+                    td.appendChild(document.createTextNode(values[i][j]));
+                    tr.appendChild(td);
+                }
+
+                tbdy.appendChild(tr);
+            }
+            tbl.appendChild(tbdy);
+        }
+
+        appendTo.append(tbl);
+    }
+
+    /** Create + add line chart with multiple lines, (optional) title, (optional) series names.
+     * appendTo: jquery selector of object to append to. MUST HAVE ID
+     * */
+    function createLineChart(chartObj, appendTo, chartWidth, chartHeight) {
+        //Expect: RenderableComponentLineChart
+        var title = chartObj['title'];
+        var xData = chartObj['x'];
+        var yData = chartObj['y'];
+        var mTop = chartObj['marginTop'];
+        var mBottom = chartObj['marginBottom'];
+        var mLeft = chartObj['marginLeft'];
+        var mRight = chartObj['marginRight'];
+        var removeAxisHorizontal = chartObj['removeAxisHorizontal'];
+        var seriesNames = chartObj['seriesNames'];
+        var withLegend = chartObj['legend'];
+        var nSeries = (!xData ? 0 : xData.length);
+
+        // Set the dimensions of the canvas / graph
+        var margin = {top: mTop, right: mRight, bottom: mBottom, left: mLeft},
+                width = chartWidth - margin.left - margin.right,
+                height = chartHeight - margin.top - margin.bottom;
+
+        // Set the ranges
+        var xScale = d3.scale.linear().range([0, width]);
+        var yScale = d3.scale.linear().range([height, 0]);
+
+        // Define the axes
+        var xAxis = d3.svg.axis().scale(xScale)
+                .innerTickSize(-height)     //used as grid line
+                .orient("bottom").ticks(5);
+
+        if(removeAxisHorizontal == true){
+            xAxis.tickValues([]);
+        }
+
+        var yAxis = d3.svg.axis().scale(yScale)
+                .innerTickSize(-width)      //used as grid line
+                .orient("left").ticks(5);
+
+        // Define the line
+        var valueline = d3.svg.line()
+                .x(function (d) {
+                    return xScale(d.xPos);
+                })
+                .y(function (d) {
+                    return yScale(d.yPos);
+                });
+
+        // Adds the svg canvas
+        var svg = d3.select("#" + appendTo.attr("id"))
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("padding", "20px")
+                .append("g")
+                .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+        // Scale the range of the chart
+        var xMin = Number.MAX_VALUE;
+        var xMax = -Number.MAX_VALUE;
+        var yMax = -Number.MAX_VALUE;
+        var yMin = Number.MAX_VALUE;
+        for (var i = 0; i < nSeries; i++) {
+            var xV = xData[i];
+            var yV = yData[i];
+            var thisMin = d3.min(xV);
+            var thisMax = d3.max(xV);
+            var thisMaxY = d3.max(yV);
+            var thisMinY = d3.min(yV);
+            if (thisMin < xMin) xMin = thisMin;
+            if (thisMax > xMax) xMax = thisMax;
+            if (thisMaxY > yMax) yMax = thisMaxY;
+            if (thisMinY < yMin) yMin = thisMinY;
+        }
+        if (yMin > 0) yMin = 0;
+        xScale.domain([xMin, xMax]);
+        yScale.domain([yMin, yMax]);
+
+        // Add the valueline path.
+        var color = d3.scale.category10();
+        for (var i = 0; i < nSeries; i++) {
+            var xVals = xData[i];
+            var yVals = yData[i];
+
+            var data = xVals.map(function (d, i) {
+                return {'xPos': xVals[i], 'yPos': yVals[i]};
+            });
+            svg.append("path")
+                    .attr("class", "line")
+                    .style("stroke", color(i))
+                    .attr("d", valueline(data));
+        }
+
+        // Add the X Axis
+        svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+        // Add the Y Axis
+        svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+        //Add legend (if present)
+        if (seriesNames && withLegend == true) {
+            var legendSpace = width / i;
+            for (var i = 0; i < nSeries; i++) {
+                var values = xData[i];
+                var yValues = yData[i];
+                var lastX = values[values.length - 1];
+                var lastY = yValues[yValues.length - 1];
+                var toDisplay;
+                if (!lastX || !lastY) toDisplay = seriesNames[i] + " (no data)";
+                else toDisplay = seriesNames[i] + " (" + lastX.toPrecision(5) + "," + lastY.toPrecision(5) + ")";
+                svg.append("text")
+                        .attr("x", (legendSpace / 2) + i * legendSpace) // spacing
+                        .attr("y", height + (margin.bottom / 2) + 5)
+                        .attr("class", "legend")    // style the legend
+                        .style("fill", color(i))
+                        .text(toDisplay);
+
+            }
+        }
+
+        //Add title (if present)
+        if (title) {
+            svg.append("text")
+                    .attr("x", (width / 2))
+                    .attr("y", 0 - ((margin.top - 30) / 2))
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "13px")
+                    .style("text-decoration", "underline")
+                    .text(title);
+        }
+    }
+
+    /** Create + add histogram
+     * */
+    function createHistogram(chartObj, appendTo, chartWidth, chartHeight) {
+        //Expect: RenderableComponentHistogram
+        var title = chartObj['title'];
+        var lowerBounds = chartObj['lowerBounds'];
+        var upperBounds = chartObj['upperBounds'];
+        var yValues = chartObj['yvalues'];
+        var mTop = chartObj['marginTop'];
+        var mBottom = chartObj['marginBottom'];
+        var mLeft = chartObj['marginLeft'];
+        var mRight = chartObj['marginRight'];
+//        var removeAxisHorizontal = chartObj['removeAxisHorizontal'];
+
+        // Set the dimensions of the canvas / graph
+        var margin = {top: mTop, right: mRight, bottom: mBottom, left: mLeft},
+                width = chartWidth - margin.left - margin.right,
+                height = chartHeight - margin.top - margin.bottom;
+
+        // Set the ranges
+        var xScale = d3.scale.linear().range([0, width]);
+        var yScale = d3.scale.linear().range([height, 0]);
+
+        var xMin = Number.MAX_VALUE;
+        var xMax = -Number.MAX_VALUE;
+        var yMax = -Number.MAX_VALUE;
+        for (var i = 0; i < lowerBounds.length; i++) {
+            if (lowerBounds[i] < xMin) xMin = lowerBounds[i];
+            if (upperBounds[i] > xMax) xMax = upperBounds[i];
+            if (yValues[i] > yMax) yMax = yValues[i];
+        }
+
+        // Define the axes
+        var xAxis = d3.scale.linear()
+                .domain([xMin, xMax])
+                .range([0, width]);
+
+        var yAxis = d3.scale.linear()
+                .domain([0, yMax])
+                .range([height, 0]);
+
+        // Set up the data:
+        var data = lowerBounds.map(function (d, i) {
+            return {'width': upperBounds[i] - lowerBounds[i], 'height': yValues[i], 'offset': lowerBounds[i]};
+        });
+
+
+        // Adds the svg canvas
+        var svg = d3.select("#" + appendTo.attr("id"))
+                .append("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .attr("padding", "20px")
+                .append("g")
+                .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+        // Add the bins.
+        svg.selectAll(".bin")
+                .data(data)
+                .enter().append("rect")
+                .attr("class", "bin")
+                .attr("x", function(d) { return xAxis(d.offset); })
+                .attr("width", function(d) { return xAxis(xMin + d.width) - 1; })
+                .attr("y", function(d) { return yAxis(d.height); })
+                .attr("height", function(d) { return height - yAxis(d.height); });
+
+        svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.svg.axis()
+                        .scale(xAxis)
+                        .orient("bottom"));
+
+        svg.append("g")
+                .attr("class", "y axis")
+                .call(d3.svg.axis()
+                        .scale(yAxis)
+                        .orient("left"));
+
+        //Add title (if present)
+        if (title) {
+            svg.append("text")
+                    .attr("x", (width / 2))
+                    .attr("y", 0 - ((margin.top - 30) / 2))
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "13px")
+                    .style("text-decoration", "underline")
+                    .text(title);
+        }
+    }
+</script>
+
+<table style="width: 100%; padding: 5px" class="hd">
+    <tbody>
+    <tr>
+        <td style="width:15px; height:35px; padding: 4px 15px;">
+        <td>Data Analysis</td>
+        <td style="text-align:right">2021-01-05 14:17:52 +00:00</td>
+        <td style="width:15px; height:35px; padding: 4px 15px;">
+    </tr>
+    </tbody>
+</table>
+
+<div style="width:1400px; margin:0 auto; border:0px" id="outerdiv">
+    <div style="width:100%; padding-top:20px" id="maindiv">
+        <div style="width:100%; height:20px"></div>
+        <div style="width:100%;" class="sectionheader">
+            <div style="padding-left:40px; padding-top:3px; padding-bottom:3px">
+                Summary Column Analysis
+            </div>
+        </div>
+        <div style="width:100%; height:auto" align="center" id="tablediv">
+
+        </div>
+
+        <div style="width:100%; height:20px"></div>
+        <div style="width:100%;" class="sectionheader">
+            <div style="padding-left:40px; padding-top:3px; padding-bottom:3px">
+                Numerical Column Histograms
+            </div>
+        </div>
+        <div style="width:100%; height:auto" align="center" id="histogramdiv">
+
+        </div>
+
+    </div>
+</div>
+
+<div id="histdiv_PlateID" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 0.0, 9.5, 19.0, 28.5, 38.0, 47.5, 57.0, 66.5, 76.0, 85.5 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "Plate ID",
+    "upperBounds" : [ 9.5, 19.0, 28.5, 38.0, 47.5, 57.0, 66.5, 76.0, 85.5, 95.0 ],
+    "yvalues" : [ 10.0, 10.0, 10.0, 9.0, 10.0, 9.0, 10.0, 9.0, 10.0, 11.0 ]
+  }
+}
+</div>
+<div id="histdiv_VehicleBodyType" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 804585.0, 9109794.3, 1.74150036E7, 2.57202129E7, 3.40254222E7, 4.23306315E7, 5.06358408E7, 5.89410501E7, 6.72462594E7, 7.55514687E7 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "Vehicle Body Type",
+    "upperBounds" : [ 9109794.3, 1.74150036E7, 2.57202129E7, 3.40254222E7, 4.23306315E7, 5.06358408E7, 5.89410501E7, 6.72462594E7, 7.55514687E7, 8.3856678E7 ],
+    "yvalues" : [ 56.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 42.0 ]
+  }
+}
+</div>
+<div id="histdiv_VehicleMake" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 667787.0, 8.685778762E8, 1.7364879654E9, 2.6043980546000004E9, 3.4723081438E9, 4.340218233E9, 5.208128322200001E9, 6.076038411400001E9, 6.9439485006E9, 7.8118585898E9 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "Vehicle Make",
+    "upperBounds" : [ 8.685778762E8, 1.7364879654E9, 2.6043980546000004E9, 3.4723081438E9, 4.340218233E9, 5.208128322200001E9, 6.076038411400001E9, 6.9439485006E9, 7.8118585898E9, 8.679768679E9 ],
+    "yvalues" : [ 18.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 14.0, 30.0, 36.0 ]
+  }
+}
+</div>
+<div id="histdiv_StreetCode1" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 0.0, 6809.0, 13618.0, 20427.0, 27236.0, 34045.0, 40854.0, 47663.0, 54472.0, 61281.0 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "Street Code1",
+    "upperBounds" : [ 6809.0, 13618.0, 20427.0, 27236.0, 34045.0, 40854.0, 47663.0, 54472.0, 61281.0, 68090.0 ],
+    "yvalues" : [ 2.0, 0.0, 28.0, 6.0, 6.0, 2.0, 1.0, 5.0, 11.0, 37.0 ]
+  }
+}
+</div>
+<div id="histdiv_StreetCode2" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 0.0, 6809.0, 13618.0, 20427.0, 27236.0, 34045.0, 40854.0, 47663.0, 54472.0, 61281.0 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "Street Code2",
+    "upperBounds" : [ 6809.0, 13618.0, 20427.0, 27236.0, 34045.0, 40854.0, 47663.0, 54472.0, 61281.0, 68090.0 ],
+    "yvalues" : [ 2.0, 0.0, 27.0, 6.0, 25.0, 12.0, 4.0, 11.0, 4.0, 7.0 ]
+  }
+}
+</div>
+<div id="histdiv_StreetCode3" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 0.0, 6561.7, 13123.4, 19685.1, 26246.8, 32808.5, 39370.2, 45931.9, 52493.6, 59055.299999999996 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "Street Code3",
+    "upperBounds" : [ 6561.7, 13123.4, 19685.1, 26246.8, 32808.5, 39370.2, 45931.9, 52493.6, 59055.299999999996, 65617.0 ],
+    "yvalues" : [ 4.0, 0.0, 28.0, 7.0, 7.0, 19.0, 6.0, 15.0, 3.0, 9.0 ]
+  }
+}
+</div>
+<div id="histdiv_VehicleColor" style="display:none">
+{
+  "RenderableComponentHistogram" : {
+    "componentType" : "histogram",
+    "lowerBounds" : [ 6675.0, 8.772798544E8, 1.7545530338E9, 2.6318262132E9, 3.5090993926E9, 4.386372572E9, 5.2636457514E9, 6.1409189308E9, 7.0181921102E9, 7.895465289599999E9 ],
+    "marginBottom" : 60,
+    "marginLeft" : 90,
+    "marginRight" : 20,
+    "marginTop" : 60,
+    "title" : "Vehicle Color",
+    "upperBounds" : [ 8.772798544E8, 1.7545530338E9, 2.6318262132E9, 3.5090993926E9, 4.386372572E9, 5.2636457514E9, 6.1409189308E9, 7.0181921102E9, 7.895465289599999E9, 8.772738469E9 ],
+    "yvalues" : [ 73.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 12.0, 1.0, 12.0 ]
+  }
+}
+</div>
+<div id="tablesource" style="display:none">
+{
+  "RenderableComponentTable" : {
+    "backgroundColor" : "#FFFFFF",
+    "border" : 1,
+    "colWidthsPercent" : [ 20.0, 10.0, 70.0 ],
+    "componentType" : "simpletable",
+    "header" : [ "Column Name", "Column Type", "Column Analysis" ],
+    "headerColor" : "#CCCCCC",
+    "padBottomPx" : 0,
+    "padLeftPx" : 4,
+    "padRightPx" : 4,
+    "padTopPx" : 0,
+    "table" : [ [ "Plate ID", "Double", "DoubleAnalysis(min=0.0, max=95.0, mean=47.58163265306122, sampleStDev=28.047427972341154, sampleVariance=786.6582158636651, countZero=1, countNegative=0, countPositive=98, countMinValue=1, countMaxValue=1, count=98,  quantiles=[0.001 : 0.0, 0.01 : 0.48, 0.1 : 9.3, 0.5 : 47.5, 0.9 : 86.7, 0.99 : 94.52, 0.999 : 95.0])" ], [ "Vehicle Body Type", "Double", "DoubleAnalysis(min=804585.0, max=8.3856678E7, mean=3.641698951020409E7, sampleStDev=4.129520650769559E7, sampleVariance=1.7052940805132245E15, countZero=0, countNegative=0, countPositive=98, countMinValue=4, countMaxValue=42, count=98,  quantiles=[0.001 : 804585.0, 0.01 : 804585.0, 0.1 : 836878.0, 0.5 : 836878.0, 0.9 : 8.3856678E7, 0.99 : 8.3856678E7, 0.999 : 8.3856678E7])" ], [ "Vehicle Make", "Double", "DoubleAnalysis(min=667787.0, max=8.679768679E9, mean=6.288446676428574E9, sampleStDev=3.0193858521518326E9, sampleVariance=9.1166909241746493E18, countZero=0, countNegative=0, countPositive=98, countMinValue=3, countMaxValue=1, count=98,  quantiles=[0.001 : 667787.0, 0.01 : 667787.0, 0.1 : 7.1428361E7, 0.5 : 7.5242979805E9, 0.9 : 8.479897984E9, 0.99 : 8.5838307454E9, 0.999 : 8.679768679E9])" ], [ "Street Code1", "Integer", "IntegerAnalysis(min=0, max=68090, mean=42921.61224489795, sampleStDev=21192.725374929203, sampleVariance=4.491316088171682E8, countZero=2, countNegative=0, countPositive=98, countMinValue=2, countMaxValue=2, count=98,  quantiles=[0.001 : 0.0, 0.01 : 0.0, 0.1 : 17235.0, 0.5 : 51993.0, 0.9 : 64151.0, 0.99 : 68090.0, 0.999 : 68090.0])" ], [ "Street Code2", "Integer", "IntegerAnalysis(min=0, max=68090, mean=33294.663265306124, sampleStDev=15726.043445585768, sampleVariance=2.473084424524511E8, countZero=2, countNegative=0, countPositive=98, countMinValue=2, countMaxValue=3, count=98,  quantiles=[0.001 : 0.0, 0.01 : 0.0, 0.1 : 17085.0, 0.5 : 33432.5, 0.9 : 56856.0, 0.99 : 68090.0, 0.999 : 68090.0])" ], [ "Street Code3", "Integer", "IntegerAnalysis(min=0, max=65617, mean=33163.47959183673, sampleStDev=16559.760057421518, sampleVariance=2.7422565315937304E8, countZero=4, countNegative=0, countPositive=98, countMinValue=4, countMaxValue=4, count=98,  quantiles=[0.001 : 0.0, 0.01 : 0.0, 0.1 : 16635.0, 0.5 : 33640.0, 0.9 : 57720.0, 0.99 : 65617.0, 0.999 : 65617.0])" ], [ "Vehicle Color", "Double", "DoubleAnalysis(min=6675.0, max=8.772738469E9, mean=1.9540122728775508E9, sampleStDev=3.362946409747364E9, sampleVariance=1.1309408554832687E19, countZero=0, countNegative=0, countPositive=98, countMinValue=3, countMaxValue=7, count=98,  quantiles=[0.001 : 6675.0, 0.01 : 6675.0, 0.1 : 7189.0, 0.5 : 846578.0, 0.9 : 8.373768669E9, 0.99 : 8.772738469E9, 0.999 : 8.772738469E9])" ], [ "Violation Date Time", "Time", "TimeAnalysis(min=1577842980000 (2020-01-01 01:43:00.000 +00:00), max=1611304440000 (2021-01-22 08:34:00.000 +00:00), mean=1.58010317510204E12, sampleStDev=3.242085782015496E9, sampleVariance=1.051112021794703E19, countZero=0, countNegative=0, countPositive=98, countMinValue=1, countMaxValue=1, count=98,  quantiles=[0.001 : 1.57784298E12, 0.01 : 1.5778434696E12, 0.1 : 1.579235988E12, 0.5 : 1.58008962E12, 0.9 : 1.580187234E12, 0.99 : 1.5964603728E12, 0.999 : 1.61130444E12])" ] ],
+    "title" : null
+  }
+}
+</div>
+
+</body>
+
+</html>
