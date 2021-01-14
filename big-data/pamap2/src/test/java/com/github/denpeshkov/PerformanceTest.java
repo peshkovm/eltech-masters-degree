@@ -72,34 +72,35 @@ public class PerformanceTest {
   private static final int NUM_OF_FORKS = 2;
   private static final String RES_FILE_PATH = "pamap2/src/test/resources/res.csv";
 
+  @State(Scope.Thread)
+  public static class ParallelInferenceState {
+    @Param({"1", "2", "3", "4"})
+    public static int numOfThreads;
+
+    public @Contended ParallelInference pi;
+    public @Contended DataSet testData;
+
+    @Setup(Level.Trial)
+    public void init(BenchmarkParams params) {
+      final int batchSize = 150;
+      final MultiLayerNetwork model = Utils.getModel();
+      this.testData = Utils.getTestData();
+
+      this.pi =
+          new ParallelInference.Builder(model)
+              .inferenceMode(InferenceMode.BATCHED)
+              .batchLimit(batchSize)
+              .workers(numOfThreads)
+              .build();
+    }
+  }
+
   @Fork(NUM_OF_FORKS)
   @Warmup(iterations = NUM_ITERATIONS)
   @Measurement(iterations = NUM_ITERATIONS)
   @BenchmarkMode(Mode.AverageTime)
   @OutputTimeUnit(TimeUnit.MILLISECONDS)
   public static class Pamap2AccelerationTest {
-    @State(Scope.Thread)
-    public static class ParallelInferenceState {
-      @Param({"1", "2", "3", "4"})
-      public static int numOfThreads;
-
-      public @Contended ParallelInference pi;
-      public @Contended DataSet testData;
-
-      @Setup(Level.Trial)
-      public void init(BenchmarkParams params) {
-        final int batchSize = 150;
-        final MultiLayerNetwork model = Utils.getModel();
-        this.testData = Utils.getTestData();
-
-        this.pi =
-            new ParallelInference.Builder(model)
-                .inferenceMode(InferenceMode.BATCHED)
-                .batchLimit(batchSize)
-                .workers(numOfThreads)
-                .build();
-      }
-    }
 
     @Threads(1)
     @Benchmark

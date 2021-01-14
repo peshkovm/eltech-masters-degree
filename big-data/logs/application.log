@@ -50446,3 +50446,851 @@ Starting MultiLayerNetwork with WorkspaceModes set to [training: ENABLED; infere
                 
 Initializing ObservablesProvider...
 
+2021-01-14 22:14:12,805 - [INFO] - from org.nd4j.linalg.factory.Nd4jBackend in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Loaded [CpuBackend] backend
+
+2021-01-14 22:14:13,365 - [WARN] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*** ND4J VERSION CHECK FAILED - INCOMPATIBLE VERSIONS FOUND ***
+
+2021-01-14 22:14:13,366 - [WARN] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Incompatible versions (different version number) of DL4J, ND4J, RL4J, DataVec, Arbiter are unlikely to function correctly
+
+2021-01-14 22:14:13,367 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Versions of artifacts found on classpath:
+
+2021-01-14 22:14:13,640 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-api : 1.0.0-beta7
+
+2021-01-14 22:14:13,640 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-arrow : 1.0.0-beta7
+
+2021-01-14 22:14:13,641 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-data-image : 1.0.0-beta7
+
+2021-01-14 22:14:13,641 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-hadoop : 1.0.0-beta
+
+2021-01-14 22:14:13,641 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-local : 1.0.0-beta7
+
+2021-01-14 22:14:13,642 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-spark_2.11 : 1.0.0-beta_spark_2
+
+2021-01-14 22:14:13,642 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-common : 1.0.0-beta7
+
+2021-01-14 22:14:13,642 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-core : 1.0.0-beta7
+
+2021-01-14 22:14:13,642 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-datasets : 1.0.0-beta7
+
+2021-01-14 22:14:13,642 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-datavec-iterators : 1.0.0-beta7
+
+2021-01-14 22:14:13,642 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-modelimport : 1.0.0-beta7
+
+2021-01-14 22:14:13,643 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-nlp : 1.0.0-beta7
+
+2021-01-14 22:14:13,643 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-nn : 1.0.0-beta7
+
+2021-01-14 22:14:13,643 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-parallel-wrapper : 1.0.0-beta7
+
+2021-01-14 22:14:13,644 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-tsne : 1.0.0-beta7
+
+2021-01-14 22:14:13,644 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui-components : 1.0.0-beta7
+
+2021-01-14 22:14:13,644 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui-model : 1.0.0-beta7
+
+2021-01-14 22:14:13,644 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui : 1.0.0-beta7
+
+2021-01-14 22:14:13,645 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-utility-iterators : 1.0.0-beta7
+
+2021-01-14 22:14:13,645 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-vertx : 1.0.0-beta7
+
+2021-01-14 22:14:13,645 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : nearestneighbor-core : 1.0.0-beta7
+
+2021-01-14 22:14:13,646 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : guava : 1.0.0-beta7
+
+2021-01-14 22:14:13,646 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : jackson : 1.0.0-beta7
+
+2021-01-14 22:14:13,647 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-aeron : 1.0.0-beta7
+
+2021-01-14 22:14:13,647 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-api : 1.0.0-beta7
+
+2021-01-14 22:14:13,647 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-common : 1.0.0-beta7
+
+2021-01-14 22:14:13,648 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-native-api : 1.0.0-beta7
+
+2021-01-14 22:14:13,648 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-native : 1.0.0-beta7
+
+2021-01-14 22:14:13,649 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server-client : 1.0.0-beta7
+
+2021-01-14 22:14:13,649 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server-model : 1.0.0-beta7
+
+2021-01-14 22:14:13,649 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server : 1.0.0-beta7
+
+2021-01-14 22:14:13,649 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : protobuf : 1.0.0-beta7
+
+2021-01-14 22:14:17,242 - [INFO] - from org.nd4j.nativeblas.NativeOpsHolder in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Number of threads used for linear algebra: 2
+
+2021-01-14 22:14:17,245 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*********************************** CPU Feature Check Warning ***********************************
+
+2021-01-14 22:14:17,245 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Warning: Initializing ND4J with Generic x86 binary on a CPU with AVX/AVX2 support
+
+2021-01-14 22:14:17,246 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Using ND4J with AVX/AVX2 will improve performance. See deeplearning4j.org/cpu for more details
+
+2021-01-14 22:14:17,246 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Or set environment variable ND4J_IGNORE_AVX=true to suppress this warning
+
+2021-01-14 22:14:17,247 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*************************************************************************************************
+
+2021-01-14 22:14:17,386 - [INFO] - from org.nd4j.nativeblas.Nd4jBlas in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Number of threads used for OpenMP BLAS: 2
+
+2021-01-14 22:14:17,428 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Backend used: [CPU]; OS: [Windows 8.1]
+
+2021-01-14 22:14:17,429 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Cores: [4]; Memory: [1,8GB];
+
+2021-01-14 22:14:17,429 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Blas vendor: [OPENBLAS]
+
+2021-01-14 22:14:17,776 - [INFO] - from org.deeplearning4j.nn.multilayer.MultiLayerNetwork in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Starting MultiLayerNetwork with WorkspaceModes set to [training: ENABLED; inference: ENABLED], cacheMode set to [NONE]
+
+2021-01-14 22:14:18,648 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 0 is 9.170708240453672
+
+2021-01-14 22:14:35,575 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 100 is 8.916051674409808
+
+2021-01-14 22:14:48,848 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 200 is 8.4837650425926
+
+2021-01-14 22:15:00,684 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 300 is 7.953194275577279
+
+2021-01-14 22:15:12,000 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 400 is 7.365466303724546
+
+2021-01-14 22:15:25,143 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 500 is 6.791201003600432
+
+2021-01-14 22:15:36,159 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 600 is 6.262339791395221
+
+2021-01-14 22:15:47,244 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 700 is 5.792797406744567
+
+2021-01-14 22:15:58,295 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 800 is 5.390163940320871
+
+2021-01-14 22:16:11,713 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 900 is 5.060844926937097
+
+2021-01-14 22:16:23,422 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1000 is 4.803689367866964
+
+2021-01-14 22:16:36,356 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1100 is 4.6091595569585735
+
+2021-01-14 22:16:48,451 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1200 is 4.464017612052852
+
+2021-01-14 22:16:59,148 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1300 is 4.3556077160266025
+
+2021-01-14 22:17:09,706 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1400 is 4.273727800343794
+
+2021-01-14 22:17:19,802 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1500 is 4.210811769951385
+
+2021-01-14 22:17:31,561 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1600 is 4.161468660170312
+
+2021-01-14 22:17:42,481 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1700 is 4.121950689016005
+
+2021-01-14 22:17:55,347 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1800 is 4.089669459158776
+
+2021-01-14 22:18:09,279 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 1900 is 4.062835433786027
+
+2021-01-14 22:18:20,192 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2000 is 4.040212859804205
+
+2021-01-14 22:18:30,686 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2100 is 4.0209196131729446
+
+2021-01-14 22:18:41,751 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2200 is 4.0042843705733535
+
+2021-01-14 22:18:53,198 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2300 is 3.989753369993331
+
+2021-01-14 22:19:04,064 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2400 is 3.97687592802918
+
+2021-01-14 22:19:15,049 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2500 is 3.965274907574669
+
+2021-01-14 22:19:26,029 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2600 is 3.9546414641367678
+
+2021-01-14 22:19:37,290 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2700 is 3.9447350930479863
+
+2021-01-14 22:19:48,469 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2800 is 3.9353743756799884
+
+2021-01-14 22:20:00,550 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 2900 is 3.9264315922370403
+
+2021-01-14 22:20:13,933 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3000 is 3.917821601067649
+
+2021-01-14 22:20:27,014 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3100 is 3.9094886301141165
+
+2021-01-14 22:20:40,323 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3200 is 3.9013947598062457
+
+2021-01-14 22:20:53,613 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3300 is 3.8934985099951325
+
+2021-01-14 22:21:07,030 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3400 is 3.885765384435422
+
+2021-01-14 22:21:20,281 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3500 is 3.8781617910137225
+
+2021-01-14 22:21:33,257 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3600 is 3.870671412728528
+
+2021-01-14 22:21:44,918 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3700 is 3.8632044536076804
+
+2021-01-14 22:21:56,111 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3800 is 3.8556618984196276
+
+2021-01-14 22:22:07,362 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 3900 is 3.847999612047185
+
+2021-01-14 22:22:18,253 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4000 is 3.8401764027344574
+
+2021-01-14 22:22:29,489 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4100 is 3.832142613948118
+
+2021-01-14 22:22:41,296 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4200 is 3.8239027903375424
+
+2021-01-14 22:22:53,111 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4300 is 3.815548582248732
+
+2021-01-14 22:23:03,986 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4400 is 3.8072478297942114
+
+2021-01-14 22:23:15,469 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4500 is 3.7991714393477274
+
+2021-01-14 22:23:25,906 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4600 is 3.791403336159788
+
+2021-01-14 22:23:36,588 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4700 is 3.78396153051958
+
+2021-01-14 22:23:49,126 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4800 is 3.7768095625806137
+
+2021-01-14 22:24:02,085 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 4900 is 3.7699018671711633
+
+2021-01-14 22:24:14,811 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5000 is 3.763230830914657
+
+2021-01-14 22:24:27,238 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5100 is 3.756808101416385
+
+2021-01-14 22:24:39,526 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5200 is 3.7506532605984564
+
+2021-01-14 22:24:52,593 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5300 is 3.744778372189967
+
+2021-01-14 22:25:06,647 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5400 is 3.7391838552551437
+
+2021-01-14 22:25:19,234 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5500 is 3.733852464681674
+
+2021-01-14 22:25:32,589 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5600 is 3.728765630230781
+
+2021-01-14 22:25:46,972 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5700 is 3.7239299185833183
+
+2021-01-14 22:26:00,978 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 5800 is 3.7193538996204656
+
+2021-01-14 22:26:56,633 - [INFO] - from org.nd4j.linalg.factory.Nd4jBackend in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Loaded [CpuBackend] backend
+
+2021-01-14 22:26:57,318 - [WARN] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*** ND4J VERSION CHECK FAILED - INCOMPATIBLE VERSIONS FOUND ***
+
+2021-01-14 22:26:57,320 - [WARN] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Incompatible versions (different version number) of DL4J, ND4J, RL4J, DataVec, Arbiter are unlikely to function correctly
+
+2021-01-14 22:26:57,320 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Versions of artifacts found on classpath:
+
+2021-01-14 22:26:57,779 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-api : 1.0.0-beta7
+
+2021-01-14 22:26:57,780 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-arrow : 1.0.0-beta7
+
+2021-01-14 22:26:57,781 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-data-image : 1.0.0-beta7
+
+2021-01-14 22:26:57,781 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-hadoop : 1.0.0-beta
+
+2021-01-14 22:26:57,781 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-local : 1.0.0-beta7
+
+2021-01-14 22:26:57,781 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-spark_2.11 : 1.0.0-beta_spark_2
+
+2021-01-14 22:26:57,781 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-common : 1.0.0-beta7
+
+2021-01-14 22:26:57,782 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-core : 1.0.0-beta7
+
+2021-01-14 22:26:57,783 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-datasets : 1.0.0-beta7
+
+2021-01-14 22:26:57,783 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-datavec-iterators : 1.0.0-beta7
+
+2021-01-14 22:26:57,783 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-modelimport : 1.0.0-beta7
+
+2021-01-14 22:26:57,783 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-nlp : 1.0.0-beta7
+
+2021-01-14 22:26:57,784 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-nn : 1.0.0-beta7
+
+2021-01-14 22:26:57,784 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-parallel-wrapper : 1.0.0-beta7
+
+2021-01-14 22:26:57,784 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-tsne : 1.0.0-beta7
+
+2021-01-14 22:26:57,784 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui-components : 1.0.0-beta7
+
+2021-01-14 22:26:57,785 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui-model : 1.0.0-beta7
+
+2021-01-14 22:26:57,787 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui : 1.0.0-beta7
+
+2021-01-14 22:26:57,789 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-utility-iterators : 1.0.0-beta7
+
+2021-01-14 22:26:57,790 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-vertx : 1.0.0-beta7
+
+2021-01-14 22:26:57,790 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : nearestneighbor-core : 1.0.0-beta7
+
+2021-01-14 22:26:57,791 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : guava : 1.0.0-beta7
+
+2021-01-14 22:26:57,791 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : jackson : 1.0.0-beta7
+
+2021-01-14 22:26:57,791 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-aeron : 1.0.0-beta7
+
+2021-01-14 22:26:57,791 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-api : 1.0.0-beta7
+
+2021-01-14 22:26:57,792 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-common : 1.0.0-beta7
+
+2021-01-14 22:26:57,792 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-native-api : 1.0.0-beta7
+
+2021-01-14 22:26:57,792 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-native : 1.0.0-beta7
+
+2021-01-14 22:26:57,792 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server-client : 1.0.0-beta7
+
+2021-01-14 22:26:57,793 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server-model : 1.0.0-beta7
+
+2021-01-14 22:26:57,793 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server : 1.0.0-beta7
+
+2021-01-14 22:26:57,793 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : protobuf : 1.0.0-beta7
+
+2021-01-14 22:26:59,848 - [INFO] - from org.nd4j.nativeblas.NativeOpsHolder in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Number of threads used for linear algebra: 2
+
+2021-01-14 22:26:59,851 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*********************************** CPU Feature Check Warning ***********************************
+
+2021-01-14 22:26:59,852 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Warning: Initializing ND4J with Generic x86 binary on a CPU with AVX/AVX2 support
+
+2021-01-14 22:26:59,854 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Using ND4J with AVX/AVX2 will improve performance. See deeplearning4j.org/cpu for more details
+
+2021-01-14 22:26:59,855 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Or set environment variable ND4J_IGNORE_AVX=true to suppress this warning
+
+2021-01-14 22:26:59,856 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*************************************************************************************************
+
+2021-01-14 22:27:00,039 - [INFO] - from org.nd4j.nativeblas.Nd4jBlas in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Number of threads used for OpenMP BLAS: 2
+
+2021-01-14 22:27:00,083 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Backend used: [CPU]; OS: [Windows 8.1]
+
+2021-01-14 22:27:00,084 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Cores: [4]; Memory: [1,8GB];
+
+2021-01-14 22:27:00,084 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Blas vendor: [OPENBLAS]
+
+2021-01-14 22:27:00,476 - [INFO] - from org.deeplearning4j.nn.multilayer.MultiLayerNetwork in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Starting MultiLayerNetwork with WorkspaceModes set to [training: ENABLED; inference: ENABLED], cacheMode set to [NONE]
+
+2021-01-14 22:27:01,232 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 0 is 9.169181732319007
+
+2021-01-14 22:27:20,149 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 100 is 8.899459020986491
+
+2021-01-14 22:27:36,259 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 200 is 8.447499149337872
+
+2021-01-14 22:27:50,675 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 300 is 7.897297677951968
+
+2021-01-14 22:28:01,447 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 400 is 7.302655357240449
+
+2021-01-14 22:28:15,327 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 500 is 6.726889993632881
+
+2021-01-14 22:28:28,908 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 600 is 6.200807027348334
+
+2021-01-14 22:28:44,317 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 700 is 5.737160889731986
+
+2021-01-14 22:28:57,835 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 800 is 5.343051334893944
+
+2021-01-14 22:29:12,517 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 900 is 5.023718607631557
+
+2021-01-14 22:29:25,711 - [INFO] - from org.deeplearning4j.parallelism.ParallelInference in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Initializing ObservablesProvider...
+
+2021-01-14 22:30:14,300 - [INFO] - from org.nd4j.linalg.factory.Nd4jBackend in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Loaded [CpuBackend] backend
+
+2021-01-14 22:30:14,930 - [WARN] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*** ND4J VERSION CHECK FAILED - INCOMPATIBLE VERSIONS FOUND ***
+
+2021-01-14 22:30:14,931 - [WARN] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Incompatible versions (different version number) of DL4J, ND4J, RL4J, DataVec, Arbiter are unlikely to function correctly
+
+2021-01-14 22:30:14,931 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Versions of artifacts found on classpath:
+
+2021-01-14 22:30:15,297 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-api : 1.0.0-beta7
+
+2021-01-14 22:30:15,298 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-arrow : 1.0.0-beta7
+
+2021-01-14 22:30:15,298 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-data-image : 1.0.0-beta7
+
+2021-01-14 22:30:15,298 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-hadoop : 1.0.0-beta
+
+2021-01-14 22:30:15,298 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-local : 1.0.0-beta7
+
+2021-01-14 22:30:15,299 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.datavec : datavec-spark_2.11 : 1.0.0-beta_spark_2
+
+2021-01-14 22:30:15,299 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-common : 1.0.0-beta7
+
+2021-01-14 22:30:15,299 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-core : 1.0.0-beta7
+
+2021-01-14 22:30:15,299 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-datasets : 1.0.0-beta7
+
+2021-01-14 22:30:15,300 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-datavec-iterators : 1.0.0-beta7
+
+2021-01-14 22:30:15,300 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-modelimport : 1.0.0-beta7
+
+2021-01-14 22:30:15,300 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-nlp : 1.0.0-beta7
+
+2021-01-14 22:30:15,300 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-nn : 1.0.0-beta7
+
+2021-01-14 22:30:15,300 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-parallel-wrapper : 1.0.0-beta7
+
+2021-01-14 22:30:15,300 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-tsne : 1.0.0-beta7
+
+2021-01-14 22:30:15,301 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui-components : 1.0.0-beta7
+
+2021-01-14 22:30:15,301 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui-model : 1.0.0-beta7
+
+2021-01-14 22:30:15,304 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-ui : 1.0.0-beta7
+
+2021-01-14 22:30:15,306 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-utility-iterators : 1.0.0-beta7
+
+2021-01-14 22:30:15,306 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : deeplearning4j-vertx : 1.0.0-beta7
+
+2021-01-14 22:30:15,306 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.deeplearning4j : nearestneighbor-core : 1.0.0-beta7
+
+2021-01-14 22:30:15,306 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : guava : 1.0.0-beta7
+
+2021-01-14 22:30:15,307 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : jackson : 1.0.0-beta7
+
+2021-01-14 22:30:15,307 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-aeron : 1.0.0-beta7
+
+2021-01-14 22:30:15,307 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-api : 1.0.0-beta7
+
+2021-01-14 22:30:15,307 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-common : 1.0.0-beta7
+
+2021-01-14 22:30:15,307 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-native-api : 1.0.0-beta7
+
+2021-01-14 22:30:15,308 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-native : 1.0.0-beta7
+
+2021-01-14 22:30:15,308 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server-client : 1.0.0-beta7
+
+2021-01-14 22:30:15,308 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server-model : 1.0.0-beta7
+
+2021-01-14 22:30:15,308 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : nd4j-parameter-server : 1.0.0-beta7
+
+2021-01-14 22:30:15,308 - [INFO] - from org.nd4j.versioncheck.VersionCheck in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+org.nd4j : protobuf : 1.0.0-beta7
+
+2021-01-14 22:30:17,226 - [INFO] - from org.nd4j.nativeblas.NativeOpsHolder in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Number of threads used for linear algebra: 2
+
+2021-01-14 22:30:17,229 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*********************************** CPU Feature Check Warning ***********************************
+
+2021-01-14 22:30:17,229 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Warning: Initializing ND4J with Generic x86 binary on a CPU with AVX/AVX2 support
+
+2021-01-14 22:30:17,229 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Using ND4J with AVX/AVX2 will improve performance. See deeplearning4j.org/cpu for more details
+
+2021-01-14 22:30:17,230 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Or set environment variable ND4J_IGNORE_AVX=true to suppress this warning
+
+2021-01-14 22:30:17,230 - [WARN] - from org.nd4j.linalg.cpu.nativecpu.CpuNDArrayFactory in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+*************************************************************************************************
+
+2021-01-14 22:30:17,410 - [INFO] - from org.nd4j.nativeblas.Nd4jBlas in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Number of threads used for OpenMP BLAS: 2
+
+2021-01-14 22:30:17,464 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Backend used: [CPU]; OS: [Windows 8.1]
+
+2021-01-14 22:30:17,465 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Cores: [4]; Memory: [1,8GB];
+
+2021-01-14 22:30:17,465 - [INFO] - from org.nd4j.linalg.api.ops.executioner.DefaultOpExecutioner in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Blas vendor: [OPENBLAS]
+
+2021-01-14 22:30:17,813 - [INFO] - from org.deeplearning4j.nn.multilayer.MultiLayerNetwork in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Starting MultiLayerNetwork with WorkspaceModes set to [training: ENABLED; inference: ENABLED], cacheMode set to [NONE]
+
+2021-01-14 22:30:18,600 - [INFO] - from org.deeplearning4j.optimize.listeners.ScoreIterationListener in com.github.peshkovm.PerformanceTest.NycParkingTicketsAccelerationTest.evaluate-jmh-worker-1
+                
+Score at iteration 0 is 9.171371447203029
+
