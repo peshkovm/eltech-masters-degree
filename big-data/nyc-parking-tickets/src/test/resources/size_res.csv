@@ -1,0 +1,5 @@
+Id,Mode,Cnt,Threads,Score,Error,Units
+com.github.peshkovm.SizeOfDatasetPerformanceTest.NycParkingTicketsAccelerationTest.evaluate-AverageTime-datasetSize-1000,AverageTime,40,1,1314.082345325,141.72452071305753,ms/op
+com.github.peshkovm.SizeOfDatasetPerformanceTest.NycParkingTicketsAccelerationTest.evaluate-AverageTime-datasetSize-5000,AverageTime,40,1,3644.1970313750003,104.2683042197169,ms/op
+com.github.peshkovm.SizeOfDatasetPerformanceTest.NycParkingTicketsAccelerationTest.evaluate-AverageTime-datasetSize-10000,AverageTime,40,1,6678.176796575,166.42420822998562,ms/op
+com.github.peshkovm.SizeOfDatasetPerformanceTest.NycParkingTicketsAccelerationTest.evaluate-AverageTime-datasetSize-14000,AverageTime,40,1,9017.336532824997,62.05682655164724,ms/op

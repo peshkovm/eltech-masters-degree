@@ -1,0 +1,5 @@
+Id,Mode,Cnt,Threads,Score,Error,Units
+com.github.peshkovm.NumOfThreadsPerformanceTest.NycParkingTicketsAccelerationTest.evaluate-AverageTime-numOfThreads-1,AverageTime,40,1,53.02023768204026,1.705268507872065,ms/op
+com.github.peshkovm.NumOfThreadsPerformanceTest.NycParkingTicketsAccelerationTest.evaluate-AverageTime-numOfThreads-2,AverageTime,40,1,51.567336088362424,1.853011909120205,ms/op
+com.github.peshkovm.NumOfThreadsPerformanceTest.NycParkingTicketsAccelerationTest.evaluate-AverageTime-numOfThreads-3,AverageTime,40,1,54.09112903298491,1.7979555698010643,ms/op
+com.github.peshkovm.NumOfThreadsPerformanceTest.NycParkingTicketsAccelerationTest.evaluate-AverageTime-numOfThreads-4,AverageTime,40,1,54.49846870801931,2.0837894678534177,ms/op
