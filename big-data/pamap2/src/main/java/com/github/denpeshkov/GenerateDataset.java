@@ -18,6 +18,7 @@ public class GenerateDataset {
   private static void orig() throws IOException {
     final String outDatasetPath = "pamap2/src/main/resources/pamap2.csv";
     AtomicInteger i = new AtomicInteger();
+    AtomicInteger linesCount = new AtomicInteger();
 
     Files.deleteIfExists(Paths.get(outDatasetPath));
     Files.newDirectoryStream(Paths.get(inDatasetPath))
@@ -37,12 +38,13 @@ public class GenerateDataset {
                           line -> {
                             try {
                               final int id = Integer.parseInt(line.split(" ")[1]);
-                              if (arr[id] <= 100) {
+                              if (arr[id] <= 2000) {
                                 arr[id]++;
                                 Files.write(
                                     Paths.get(outDatasetPath),
                                     (line + "\n").getBytes(),
                                     StandardOpenOption.APPEND);
+                                linesCount.getAndIncrement();
                               }
 
                             } catch (IOException e) {
@@ -55,5 +57,7 @@ public class GenerateDataset {
                 }
               }
             });
+
+    System.out.println("linesCount = " + linesCount);
   }
 }

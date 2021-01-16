@@ -33,7 +33,6 @@ import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
-import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
 import org.deeplearning4j.parallelism.ParallelInference;
 import org.deeplearning4j.parallelism.inference.InferenceMode;
 import org.nd4j.evaluation.classification.Evaluation;
@@ -57,17 +56,15 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Threads;
-import org.openjdk.jmh.annotations.Timeout;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import org.openjdk.jmh.runner.options.TimeValue;
 import sun.misc.Contended;
 
-public class PerformanceTest {
+public class NumOfThreadsPerformanceTest {
   private static final int NUM_ITERATIONS = 20;
   private static final int NUM_OF_FORKS = 2;
   private static final String RES_FILE_PATH = "pamap2/src/test/resources/res.csv";
@@ -75,7 +72,7 @@ public class PerformanceTest {
   @State(Scope.Thread)
   public static class ParallelInferenceState {
     @Param({"1", "2", "3", "4"})
-    public static int numOfThreads;
+    public static int numOfThreads = 1;
 
     public @Contended ParallelInference pi;
     public @Contended DataSet testData;
@@ -120,7 +117,7 @@ public class PerformanceTest {
   public static void main(String[] args) throws Exception {
     Options opt =
         new OptionsBuilder()
-            .include(PerformanceTest.class.getName())
+            .include(NumOfThreadsPerformanceTest.class.getName())
             .jvmArgsAppend("-XX:-RestrictContended")
             .syncIterations(true)
             .shouldFailOnError(true)

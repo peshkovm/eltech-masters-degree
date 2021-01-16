@@ -5,25 +5,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.collection.CollectionRecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
 import org.datavec.api.split.FileSplit;
 import org.datavec.api.transform.TransformProcess;
-import org.datavec.api.transform.condition.ConditionOp;
-import org.datavec.api.transform.condition.column.NaNColumnCondition;
-import org.datavec.api.transform.condition.column.StringColumnCondition;
 import org.datavec.api.transform.schema.Schema;
 import org.datavec.api.transform.schema.Schema.Builder;
 import org.datavec.api.transform.transform.string.ConcatenateStringColumns;
@@ -69,7 +62,7 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import sun.misc.Contended;
 
-public class PerformanceTest {
+public class NumOfThreadsPerformanceTest {
   private static final int NUM_ITERATIONS = 20;
   private static final int NUM_OF_FORKS = 2;
   private static final String RES_FILE_PATH = "nyc-parking-tickets/src/test/resources/res.csv";
@@ -77,7 +70,7 @@ public class PerformanceTest {
   @State(Scope.Thread)
   public static class ParallelInferenceState {
     @Param({"1", "2", "3", "4"})
-    public static int numOfThreads;
+    public static int numOfThreads = 1;
 
     public @Contended ParallelInference pi;
     public @Contended DataSet testData;
@@ -122,7 +115,7 @@ public class PerformanceTest {
   public static void main(String[] args) throws Exception {
     Options opt =
         new OptionsBuilder()
-            .include(PerformanceTest.class.getName())
+            .include(NumOfThreadsPerformanceTest.class.getName())
             .jvmArgsAppend("-XX:-RestrictContended")
             .syncIterations(true)
             .shouldFailOnError(true)
