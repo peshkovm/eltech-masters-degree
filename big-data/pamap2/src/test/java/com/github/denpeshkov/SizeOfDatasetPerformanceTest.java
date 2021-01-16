@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import jdk.internal.vm.annotation.Contended;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.collection.CollectionRecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
@@ -34,8 +35,6 @@ import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
-import org.deeplearning4j.parallelism.ParallelInference;
-import org.deeplearning4j.parallelism.inference.InferenceMode;
 import org.nd4j.evaluation.classification.Evaluation;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -58,17 +57,15 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Threads;
 import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.BenchmarkParams;
 import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import sun.misc.Contended;
 
 public class SizeOfDatasetPerformanceTest {
   private static final int NUM_ITERATIONS = 20;
   private static final int NUM_OF_FORKS = 2;
-  private static final String RES_FILE_PATH = "pamap2/src/test/resources/res.csv";
+  private static final String RES_FILE_PATH = "pamap2/src/test/resources/size_res.csv";
 
   @State(Scope.Thread)
   public static class ParallelInferenceState {
@@ -77,7 +74,7 @@ public class SizeOfDatasetPerformanceTest {
     public @Contended DataSet testData;
     public @Contended DataSet trainingData;
 
-    @Param({"1000", "50000", "100000", "150000"})
+    @Param({"10000", "50000", "100000", "150000"})
     private static int datasetSize = 1000;
 
     @Setup(Level.Trial)

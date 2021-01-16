@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import jdk.internal.vm.annotation.Contended;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.collection.CollectionRecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
@@ -62,12 +63,11 @@ import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import sun.misc.Contended;
 
 public class NumOfThreadsPerformanceTest {
   private static final int NUM_ITERATIONS = 20;
   private static final int NUM_OF_FORKS = 2;
-  private static final String RES_FILE_PATH = "pamap2/src/test/resources/res.csv";
+  private static final String RES_FILE_PATH = "pamap2/src/test/resources/thread_res.csv";
 
   @State(Scope.Thread)
   public static class ParallelInferenceState {

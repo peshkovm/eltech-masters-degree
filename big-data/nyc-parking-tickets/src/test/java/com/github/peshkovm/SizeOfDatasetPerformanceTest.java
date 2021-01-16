@@ -5,25 +5,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import jdk.internal.vm.annotation.Contended;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.collection.CollectionRecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
 import org.datavec.api.split.FileSplit;
 import org.datavec.api.transform.TransformProcess;
-import org.datavec.api.transform.condition.ConditionOp;
-import org.datavec.api.transform.condition.column.NaNColumnCondition;
-import org.datavec.api.transform.condition.column.StringColumnCondition;
 import org.datavec.api.transform.schema.Schema;
 import org.datavec.api.transform.schema.Schema.Builder;
 import org.datavec.api.transform.transform.string.ConcatenateStringColumns;
@@ -36,11 +30,7 @@ import org.deeplearning4j.nn.conf.layers.DenseLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
-import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
-import org.deeplearning4j.parallelism.ParallelInference;
-import org.deeplearning4j.parallelism.inference.InferenceMode;
 import org.joda.time.DateTimeZone;
-import org.nd4j.evaluation.EvaluationAveraging;
 import org.nd4j.evaluation.classification.Evaluation;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -68,12 +58,11 @@ import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
-import sun.misc.Contended;
 
 public class SizeOfDatasetPerformanceTest {
   private static final int NUM_ITERATIONS = 20;
   private static final int NUM_OF_FORKS = 2;
-  private static final String RES_FILE_PATH = "nyc-parking-tickets/src/test/resources/res.csv";
+  private static final String RES_FILE_PATH = "nyc-parking-tickets/src/test/resources/size_res.csv";
 
   @State(Scope.Thread)
   public static class ParallelInferenceState {
@@ -85,8 +74,8 @@ public class SizeOfDatasetPerformanceTest {
     public @Contended DataSet trainingData;
     private @Contended int numLabelClasses;
 
-    @Param({"500", "1000", "5000", "10000"})
-    private static int datasetSize = 500;
+    @Param({"1000", "5000", "10000", "14000"})
+    private static int datasetSize = 1000;
 
     @Setup(Level.Trial)
     public void init(BenchmarkParams params) {
@@ -328,7 +317,7 @@ public class SizeOfDatasetPerformanceTest {
       final MultiLayerNetwork model = new MultiLayerNetwork(conf);
       model.init();
 
-      for (int i = 0; i < 10_000; i++) {
+      for (int i = 0; i < 100; i++) {
         model.fit(trainingData);
       }
 
