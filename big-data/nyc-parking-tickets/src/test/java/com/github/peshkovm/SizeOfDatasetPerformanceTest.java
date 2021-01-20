@@ -327,7 +327,7 @@ public class SizeOfDatasetPerformanceTest {
       final MultiLayerNetwork model = new MultiLayerNetwork(conf);
       model.init();
 
-      for (int i = 0; i < 1000; i++) {
+      for (int i = 0; i < 1_000; i++) {
         model.fit(trainingData);
       }
 

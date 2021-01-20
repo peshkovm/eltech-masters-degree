@@ -413,7 +413,7 @@ public class NumOfThreadsPerformanceTest {
       // record score once every 100 iterations
       model.setListeners(new ScoreIterationListener(100));
 
-      for (int i = 0; i < 2_000; i++) {
+      for (int i = 0; i < 1_000; i++) {
         model.fit(trainingData);
       }
 
