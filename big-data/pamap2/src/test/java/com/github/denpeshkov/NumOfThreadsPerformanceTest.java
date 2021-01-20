@@ -65,7 +65,7 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 public class NumOfThreadsPerformanceTest {
-  private static final int NUM_ITERATIONS = 20;
+  private static final int NUM_ITERATIONS = 40;
   private static final int NUM_OF_FORKS = 2;
   private static final String RES_FILE_PATH = "pamap2/src/test/resources/thread_res.csv";
 

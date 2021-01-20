@@ -1,27 +1,19 @@
 package com.github.peshkovm;
 
 import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleImmutableEntry;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.collection.CollectionRecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
 import org.datavec.api.split.FileSplit;
 import org.datavec.api.transform.TransformProcess;
 import org.datavec.api.transform.analysis.DataAnalysis;
-import org.datavec.api.transform.condition.ConditionOp;
-import org.datavec.api.transform.condition.column.NaNColumnCondition;
-import org.datavec.api.transform.condition.column.StringColumnCondition;
+import org.datavec.api.transform.condition.string.StringRegexColumnCondition;
 import org.datavec.api.transform.schema.Schema;
 import org.datavec.api.transform.schema.Schema.Builder;
 import org.datavec.api.transform.transform.string.ConcatenateStringColumns;
@@ -57,6 +49,8 @@ public class Main {
 
   public static void main(String[] args) throws Exception {
     // Build dataset schema
+
+    //dataset size = 200_000
     final Schema inputSchema =
         new Builder()
             .addColumnLong("SUMMONS-NUMBER")
@@ -115,6 +109,11 @@ public class Main {
       originalData.add(rr.next());
     }
 
+    AtomicInteger plateIdNum = new AtomicInteger();
+    AtomicInteger summVehBodyNum = new AtomicInteger();
+    AtomicInteger summVehMakeNum = new AtomicInteger();
+    AtomicInteger vehColorNum = new AtomicInteger();
+
     final TransformProcess tp =
         new TransformProcess.Builder(inputSchema)
             .removeAllColumnsExceptFor(
@@ -128,51 +127,82 @@ public class Main {
                 "STREET-CODE3",
                 "VIOLATION TIME",
                 "VEHICLE COLOR")
-            .stringToCategorical(
+            .stringMapTransform(
                 "PLATE ID",
                 originalData.stream()
-                    .map(
-                        row -> {
-                          final Writable vehBody = row.get(1);
-
-                          return vehBody.toString();
-                        })
+                    .map(row -> row.get(1).toString())
                     .distinct()
-                    .collect(Collectors.toList()))
-            .categoricalToInteger("PLATE ID")
-            .stringToCategorical(
+                    .map(
+                        plateIdStr ->
+                            new SimpleImmutableEntry<>(
+                                plateIdStr, String.valueOf(plateIdNum.getAndIncrement())))
+                    .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+            //            .stringToCategorical(
+            //                "SUMM-VEH-BODY",
+            //                originalData.stream()
+            //                    .map(
+            //                        row -> {
+            //                          final Writable vehBody = row.get(6);
+            //
+            //                          return vehBody.toString();
+            //                        })
+            //                    .distinct()
+            //                    .collect(Collectors.toList()))
+            //            .stringToCategorical(
+            //                "SUMM-VEH-MAKE",
+            //                originalData.stream()
+            //                    .map(
+            //                        row -> {
+            //                          final Writable vehMake = row.get(7);
+            //
+            //                          return vehMake.toString();
+            //                        })
+            //                    .distinct()
+            //                    .collect(Collectors.toList()))
+            //            .stringToCategorical(
+            //                "VEHICLE COLOR",
+            //                originalData.stream()
+            //                    .map(
+            //                        row -> {
+            //                          final Writable vehColor = row.get(33);
+            //
+            //                          return vehColor.toString();
+            //                        })
+            //                    .distinct()
+            //                    .collect(Collectors.toList()))
+            .stringMapTransform(
                 "SUMM-VEH-BODY",
                 originalData.stream()
-                    .map(
-                        row -> {
-                          final Writable vehBody = row.get(6);
-
-                          return vehBody.toString();
-                        })
+                    .map(row -> row.get(6).toString())
                     .distinct()
-                    .collect(Collectors.toList()))
-            .stringToCategorical(
+                    .map(
+                        plateIdStr ->
+                            new SimpleImmutableEntry<>(
+                                plateIdStr, String.valueOf(summVehBodyNum.getAndIncrement())))
+                    .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+            .convertToInteger("SUMM-VEH-BODY")
+            .stringMapTransform(
                 "SUMM-VEH-MAKE",
                 originalData.stream()
-                    .map(
-                        row -> {
-                          final Writable vehMake = row.get(7);
-
-                          return vehMake.toString();
-                        })
+                    .map(row -> row.get(7).toString())
                     .distinct()
-                    .collect(Collectors.toList()))
-            .stringToCategorical(
+                    .map(
+                        plateIdStr ->
+                            new SimpleImmutableEntry<>(
+                                plateIdStr, String.valueOf(summVehMakeNum.getAndIncrement())))
+                    .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+            .convertToInteger("SUMM-VEH-MAKE")
+            .stringMapTransform(
                 "VEHICLE COLOR",
                 originalData.stream()
-                    .map(
-                        row -> {
-                          final Writable vehColor = row.get(33);
-
-                          return vehColor.toString();
-                        })
+                    .map(row -> row.get(33).toString())
                     .distinct()
-                    .collect(Collectors.toList()))
+                    .map(
+                        plateIdStr ->
+                            new SimpleImmutableEntry<>(
+                                plateIdStr, String.valueOf(vehColorNum.getAndIncrement())))
+                    .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+            .convertToInteger("VEHICLE COLOR")
             .transform(
                 new ConcatenateStringColumns(
                     "STREET-CODE", "", "STREET-CODE1", "STREET-CODE2", "STREET-CODE3"))
@@ -191,12 +221,13 @@ public class Main {
                           return new SimpleImmutableEntry<>(issueDate, subIssueDate);
                         })
                     .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+            .filter(new StringRegexColumnCondition("VIOLATION TIME", "....|"))
+//            .filter(new StringRegexColumnCondition("VIOLATION TIME", "5555P"))
             .transform(
                 new ConcatenateStringColumns("ISSUE-DATE-TIME", "", "ISSUE-DATE", "VIOLATION TIME"))
             .appendStringColumnTransform("ISSUE-DATE-TIME", "M")
             .removeColumns("ISSUE-DATE", "VIOLATION TIME")
             .stringToTimeTransform("ISSUE-DATE-TIME", "YYYY-MM-DD'T'HHmma", DateTimeZone.UTC)
-            .categoricalToInteger("SUMM-VEH-BODY", "SUMM-VEH-MAKE", "VEHICLE COLOR")
             .build();
 
     final Schema outputSchema = tp.getFinalSchema();
@@ -205,7 +236,7 @@ public class Main {
     List<List<Writable>> processedData = LocalTransformExecutor.execute(originalData, tp);
 
     // Analyse data
-    getAnalysis(processedData, outputSchema);
+    //    getAnalysis(processedData, outputSchema);
 
     final int batchSize = 150;
     final int numLabelClasses =
@@ -268,7 +299,7 @@ public class Main {
     // record score once every 100 iterations
     model.setListeners(new ScoreIterationListener(100));
 
-    for (int i = 0; i < 10_000; i++) {
+    for (int i = 0; i < 2_000; i++) {
       model.fit(trainingData);
     }
 
