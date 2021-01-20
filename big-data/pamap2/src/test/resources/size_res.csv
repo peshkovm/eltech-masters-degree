@@ -1,5 +1,5 @@
 Id,Mode,Cnt,Threads,Score,Error,Units
-com.github.denpeshkov.SizeOfDatasetPerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-datasetSize-10000,AverageTime,40,1,3157.2519587750003,433.3846777241782,ms/op
-com.github.denpeshkov.SizeOfDatasetPerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-datasetSize-50000,AverageTime,40,1,3195.8146615250016,432.66384383994887,ms/op
-com.github.denpeshkov.SizeOfDatasetPerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-datasetSize-100000,AverageTime,40,1,3192.161889350001,410.7116581347495,ms/op
-com.github.denpeshkov.SizeOfDatasetPerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-datasetSize-150000,AverageTime,40,1,3139.6835564750004,383.65778447768224,ms/op
+com.github.denpeshkov.SizeOfDatasetPerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-datasetSize-10000,AverageTime,80,1,3249.0484688000006,236.29981654411023,ms/op
+com.github.denpeshkov.SizeOfDatasetPerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-datasetSize-50000,AverageTime,80,1,3160.7810193875002,225.32275835836637,ms/op
+com.github.denpeshkov.SizeOfDatasetPerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-datasetSize-100000,AverageTime,80,1,3184.7359228375,224.15997360512733,ms/op
+com.github.denpeshkov.SizeOfDatasetPerformanceTest.Pamap2AccelerationTest.evaluate-AverageTime-datasetSize-150000,AverageTime,80,1,3153.6285027125004,253.1161142143541,ms/op
