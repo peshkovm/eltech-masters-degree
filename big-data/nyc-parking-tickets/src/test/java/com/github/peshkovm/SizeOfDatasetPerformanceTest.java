@@ -11,13 +11,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import jdk.internal.vm.annotation.Contended;
 import org.datavec.api.records.reader.RecordReader;
 import org.datavec.api.records.reader.impl.collection.CollectionRecordReader;
 import org.datavec.api.records.reader.impl.csv.CSVRecordReader;
 import org.datavec.api.split.FileSplit;
 import org.datavec.api.transform.TransformProcess;
+import org.datavec.api.transform.condition.string.StringRegexColumnCondition;
 import org.datavec.api.transform.schema.Schema;
 import org.datavec.api.transform.schema.Schema.Builder;
 import org.datavec.api.transform.transform.string.ConcatenateStringColumns;
@@ -58,9 +59,10 @@ import org.openjdk.jmh.results.RunResult;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
+import sun.misc.Contended;
 
 public class SizeOfDatasetPerformanceTest {
-  private static final int NUM_ITERATIONS = 20;
+  private static final int NUM_ITERATIONS = 40;
   private static final int NUM_OF_FORKS = 2;
   private static final String RES_FILE_PATH = "nyc-parking-tickets/src/test/resources/size_res.csv";
 
@@ -74,12 +76,14 @@ public class SizeOfDatasetPerformanceTest {
     public @Contended DataSet trainingData;
     private @Contended int numLabelClasses;
 
-    @Param({"1000", "5000", "10000", "14000"})
-    private static int datasetSize = 1000;
+    @Param({"10000", "50000", "100000", "150000"})
+    private static int datasetSize = 10000;
 
     @Setup(Level.Trial)
     public void init(BenchmarkParams params) {
       // Build dataset schema
+
+      // dataset size = 200_000
       final Schema inputSchema =
           new Builder()
               .addColumnLong("SUMMONS-NUMBER")
@@ -141,8 +145,12 @@ public class SizeOfDatasetPerformanceTest {
       while (rr.hasNext()) {
         originalData.add(rr.next());
       }
-
       originalData = originalData.subList(0, datasetSize);
+
+      AtomicInteger plateIdNum = new AtomicInteger();
+      AtomicInteger summVehBodyNum = new AtomicInteger();
+      AtomicInteger summVehMakeNum = new AtomicInteger();
+      AtomicInteger vehColorNum = new AtomicInteger();
 
       final TransformProcess tp =
           new TransformProcess.Builder(inputSchema)
@@ -157,51 +165,49 @@ public class SizeOfDatasetPerformanceTest {
                   "STREET-CODE3",
                   "VIOLATION TIME",
                   "VEHICLE COLOR")
-              .stringToCategorical(
+              .stringMapTransform(
                   "PLATE ID",
                   originalData.stream()
-                      .map(
-                          row -> {
-                            final Writable vehBody = row.get(1);
-
-                            return vehBody.toString();
-                          })
+                      .map(row -> row.get(1).toString())
                       .distinct()
-                      .collect(Collectors.toList()))
-              .categoricalToInteger("PLATE ID")
-              .stringToCategorical(
+                      .map(
+                          plateIdStr ->
+                              new SimpleImmutableEntry<>(
+                                  plateIdStr, String.valueOf(plateIdNum.getAndIncrement())))
+                      .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+              .stringMapTransform(
                   "SUMM-VEH-BODY",
                   originalData.stream()
-                      .map(
-                          row -> {
-                            final Writable vehBody = row.get(6);
-
-                            return vehBody.toString();
-                          })
+                      .map(row -> row.get(6).toString())
                       .distinct()
-                      .collect(Collectors.toList()))
-              .stringToCategorical(
+                      .map(
+                          plateIdStr ->
+                              new SimpleImmutableEntry<>(
+                                  plateIdStr, String.valueOf(summVehBodyNum.getAndIncrement())))
+                      .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+              .convertToInteger("SUMM-VEH-BODY")
+              .stringMapTransform(
                   "SUMM-VEH-MAKE",
                   originalData.stream()
-                      .map(
-                          row -> {
-                            final Writable vehMake = row.get(7);
-
-                            return vehMake.toString();
-                          })
+                      .map(row -> row.get(7).toString())
                       .distinct()
-                      .collect(Collectors.toList()))
-              .stringToCategorical(
+                      .map(
+                          plateIdStr ->
+                              new SimpleImmutableEntry<>(
+                                  plateIdStr, String.valueOf(summVehMakeNum.getAndIncrement())))
+                      .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+              .convertToInteger("SUMM-VEH-MAKE")
+              .stringMapTransform(
                   "VEHICLE COLOR",
                   originalData.stream()
-                      .map(
-                          row -> {
-                            final Writable vehColor = row.get(33);
-
-                            return vehColor.toString();
-                          })
+                      .map(row -> row.get(33).toString())
                       .distinct()
-                      .collect(Collectors.toList()))
+                      .map(
+                          plateIdStr ->
+                              new SimpleImmutableEntry<>(
+                                  plateIdStr, String.valueOf(vehColorNum.getAndIncrement())))
+                      .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+              .convertToInteger("VEHICLE COLOR")
               .transform(
                   new ConcatenateStringColumns(
                       "STREET-CODE", "", "STREET-CODE1", "STREET-CODE2", "STREET-CODE3"))
@@ -220,19 +226,23 @@ public class SizeOfDatasetPerformanceTest {
                             return new SimpleImmutableEntry<>(issueDate, subIssueDate);
                           })
                       .collect(Collectors.toMap(Entry::getKey, Entry::getValue)))
+              .filter(new StringRegexColumnCondition("VIOLATION TIME", "....|"))
+              //            .filter(new StringRegexColumnCondition("VIOLATION TIME", "5555P"))
               .transform(
                   new ConcatenateStringColumns(
                       "ISSUE-DATE-TIME", "", "ISSUE-DATE", "VIOLATION TIME"))
               .appendStringColumnTransform("ISSUE-DATE-TIME", "M")
               .removeColumns("ISSUE-DATE", "VIOLATION TIME")
               .stringToTimeTransform("ISSUE-DATE-TIME", "YYYY-MM-DD'T'HHmma", DateTimeZone.UTC)
-              .categoricalToInteger("SUMM-VEH-BODY", "SUMM-VEH-MAKE", "VEHICLE COLOR")
               .build();
 
       final Schema outputSchema = tp.getFinalSchema();
 
       // Process data
       List<List<Writable>> processedData = LocalTransformExecutor.execute(originalData, tp);
+
+      // Analyse data
+      //    getAnalysis(processedData, outputSchema);
 
       final int batchSize = 150;
       final int numLabelClasses =
@@ -263,8 +273,8 @@ public class SizeOfDatasetPerformanceTest {
       // from
       // the *training* set
 
-      this.trainingData = trainingData;
       this.testData = testData;
+      this.trainingData = trainingData;
 
       final int numInputs = outputSchema.numColumns() - 1;
       final int numOutputs = numLabelClasses;
@@ -317,7 +327,7 @@ public class SizeOfDatasetPerformanceTest {
       final MultiLayerNetwork model = new MultiLayerNetwork(conf);
       model.init();
 
-      for (int i = 0; i < 100; i++) {
+      for (int i = 0; i < 1000; i++) {
         model.fit(trainingData);
       }
 
